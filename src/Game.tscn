@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/tilesets/Palm Tree Island/Terrain/Terrain.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/Player/Cannon/Cannon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/debug/DebugPanel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/NPC/NPC.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sprites/Captain Clown Nose/Captain Clown Nose without Sword/08-Dead Ground/Dead Ground 01.png" type="Texture" id=8]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
@@ -26,6 +27,9 @@ __meta__ = {
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 189.705, 190.335 )
 cannon_node_path = NodePath("Cannon")
+
+[node name="Sprite" parent="Player" index="0"]
+texture = ExtResource( 8 )
 
 [node name="Cannon" parent="Player" instance=ExtResource( 5 )]
 position = Vector2( 0, -7.59172 )
@@ -62,6 +66,6 @@ reference_path = NodePath("../../../Player/StateMachine/Move")
 properties = PoolStringArray( "velocity", "max_speed" )
 
 [node name="NPC" parent="." instance=ExtResource( 7 )]
-position = Vector2( 417.027, 286.706 )
+position = Vector2( 278.561, 286.706 )
 
 [editable path="Player"]
