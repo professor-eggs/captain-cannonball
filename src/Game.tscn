@@ -66,6 +66,6 @@ reference_path = NodePath("../../../Player/StateMachine/Move")
 properties = PoolStringArray( "velocity", "max_speed" )
 
 [node name="NPC" parent="." instance=ExtResource( 7 )]
-position = Vector2( 278.561, 286.706 )
+position = Vector2( 278.561, 87.1523 )
 
 [editable path="Player"]

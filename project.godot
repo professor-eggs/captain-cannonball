@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "BehaviourPatrol",
+"language": "GDScript",
+"path": "res://src/NPC/Behaviours/Patrol.gd"
+}, {
 "base": "Node2D",
 "class": "Cannon",
 "language": "GDScript",
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://src/Player/Move.gd"
 } ]
 _global_script_class_icons={
+"BehaviourPatrol": "",
 "Cannon": "",
 "NPC": "",
 "State": "",
@@ -130,6 +136,7 @@ fire_cannon={
 2d_physics/layer_2="Cannonball"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Environment"
+2d_physics/layer_5="NPC"
 
 [rendering]
 
