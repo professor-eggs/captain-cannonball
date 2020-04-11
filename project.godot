@@ -10,19 +10,24 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "AnimationParser",
+"language": "GDScript",
+"path": "res://src/Utility/AnimationParser.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "BaseNPC",
+"language": "GDScript",
+"path": "res://src/NPC/BaseNPC.gd"
+}, {
+"base": "Node",
 "class": "BehaviourPatrol",
 "language": "GDScript",
-"path": "res://src/NPC/Behaviours/Patrol.gd"
+"path": "res://src/NPC/Behaviours/BehaviourPatrol.gd"
 }, {
 "base": "Node2D",
 "class": "Cannon",
 "language": "GDScript",
 "path": "res://src/Player/Cannon/Cannon.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "NPC",
-"language": "GDScript",
-"path": "res://src/NPC/NPC.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -40,9 +45,10 @@ _global_script_classes=[ {
 "path": "res://src/Player/Move.gd"
 } ]
 _global_script_class_icons={
+"AnimationParser": "",
+"BaseNPC": "",
 "BehaviourPatrol": "",
 "Cannon": "",
-"NPC": "",
 "State": "",
 "StateMachine": "",
 "StateMove": ""

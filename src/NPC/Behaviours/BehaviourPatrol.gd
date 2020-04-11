@@ -19,6 +19,7 @@ var _has_arrived_at_target : bool = false
 var _pause_timer : SceneTreeTimer
 
 var velocity := Vector2.ZERO
+var facing : int
 
 
 func _init(
@@ -39,7 +40,7 @@ func _init(
 	_patrol_end_position = _owner.position + Vector2(patrol_distance, 0)
 	_target = _patrol_end_position
 	_previous_target = _patrol_start_position
-	
+	facing = _owner.default_facing
 	# clean up to avoid an error due to the timer lingering
 	_owner.connect("tree_exiting", self, "free")
 	
@@ -48,7 +49,6 @@ func _init(
 
 func _physics_process(delta: float) -> void:
 	velocity.y += 12
-	
 	if not _owner.is_on_floor():
 		_owner.move_and_slide(velocity, Vector2.UP)
 		return
@@ -59,7 +59,12 @@ func _physics_process(delta: float) -> void:
 	
 	if _has_arrived_at_target:
 		state = States.PATROL_IDLE
+		velocity.x = 0
 		if not _pause_timer:
+			# I've just entered IDLE for the first time this cycle
+			# Look the other way
+			facing *= -1
+			# Start the timer
 			_pause_timer = _owner.get_tree().create_timer(_patrol_idle_duration)
 			_pause_timer.connect("timeout", self, "_on_pause_timer_timeout")
 	
@@ -72,22 +77,23 @@ func _physics_process(delta: float) -> void:
 			_patrol_speed
 		)
 		
-		velocity = _owner.move_and_slide(velocity, Vector2.UP)
-	
-	match state:
-		States.PATROL_IDLE:
-			_animation_player.play("idle")
 		
-		States.PATROL_WALKING:
-			_animation_player.play("run")
+	facing = sign(velocity.x) if velocity.x != 0 else facing
+	velocity = _owner.move_and_slide(velocity, Vector2.UP)
 
 
 func _on_pause_timer_timeout() -> void:
-	if abs(_owner.position.x - _patrol_start_position.x) < _patrol_arrival_threshold:
+	if (
+		abs(_owner.position.x - _patrol_start_position.x)
+		< _patrol_arrival_threshold
+	):
 		# I'm at my starting position
 		_previous_target = _patrol_start_position
 		_target = _patrol_end_position
-	elif abs(_owner.position.x - _patrol_end_position.x) < _patrol_arrival_threshold:
+	elif (
+		abs(_owner.position.x - _patrol_end_position.x)
+		< _patrol_arrival_threshold
+	):
 		# I'm at the end position
 		_previous_target = _patrol_end_position
 		_target = _patrol_start_position

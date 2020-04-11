@@ -54,7 +54,8 @@ func exit() -> void:
 
 
 func connect_signals() -> void:
-	_owner.connect("cannon_fired", self, "_on_Player_cannon_fired")
+	if not _owner.is_connected("cannon_fired", self, "_on_Player_cannon_fired"):
+		var _err = _owner.connect("cannon_fired", self, "_on_Player_cannon_fired")
 
 
 func do_state_transitions():
