@@ -45,6 +45,7 @@ var behaviour_attention := BehaviourAttention.new(
 
 # Jump Behaviour
 export (float) var jump_height := 100.0
+var behaviour_jump := BehaviourJump.new(self)
 
 
 func _ready() -> void:
@@ -55,15 +56,18 @@ func _ready() -> void:
 		"body_exited", self, "_on_Attention_Area_body_exited"
 	)
 
-	print((behaviours_in_use & Behaviours.BEHAVIOUR_PATROL))
-	print((behaviours_in_use & Behaviours.BEHAVIOUR_ATTENTION))
-	print((behaviours_in_use & Behaviours.BEHAVIOUR_TEST1))
-	print((behaviours_in_use & Behaviours.BEHAVIOUR_TEST2))
+#	print((behaviours_in_use & Behaviours.BEHAVIOUR_PATROL))
+#	print((behaviours_in_use & Behaviours.BEHAVIOUR_ATTENTION))
+#	print((behaviours_in_use & Behaviours.BEHAVIOUR_TEST1))
+#	print((behaviours_in_use & Behaviours.BEHAVIOUR_TEST2))
 
 
 func _physics_process(delta: float) -> void:
 #	print(OS.get_ticks_msec(), " ", current_behaviour)
 	match current_behaviour:
+		"":
+			current_behaviour = "patrol"
+		
 		"patrol":
 			behaviour_patrol._physics_process(delta)
 			velocity = behaviour_patrol.velocity
@@ -76,9 +80,21 @@ func _physics_process(delta: float) -> void:
 					_animation_player.play("run")
 		
 		"attention":
-			behaviour_attention._physics_process(delta)
-			velocity = behaviour_attention.velocity
-			_facing = behaviour_attention.facing
+			if Input.is_action_just_pressed("jump"):
+				current_behaviour = "jump"
+				behaviour_jump.velocity = velocity
+			else:
+				behaviour_attention._physics_process(delta)
+				velocity = behaviour_attention.velocity
+				_facing = behaviour_attention.facing
+		
+		"jump":
+			if behaviour_jump.is_landed():
+				current_behaviour = ""
+			else:
+				behaviour_jump._physics_process(delta)
+				velocity = behaviour_attention.velocity
+				_facing = behaviour_attention.facing
 	
 	# Enables and disables the right AttentionArea CollisionShapes
 	($AttentionArea.get_child(_facing + 1) as CollisionShape2D).disabled = false
