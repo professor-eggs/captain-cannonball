@@ -50,7 +50,7 @@ func _init(
 func _physics_process(delta: float) -> void:
 	velocity.y += 12
 	if not _owner.is_on_floor():
-		_owner.move_and_slide(velocity, Vector2.UP)
+		velocity = _owner.move_and_slide(velocity, Vector2.UP)
 		return
 	
 	_has_arrived_at_target = (

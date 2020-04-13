@@ -113,6 +113,11 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 17 ), ExtResource( 15 ), null ],
 "loop": false,
 "name": "out",
@@ -133,6 +138,7 @@ animations = [ {
 collision_layer = 16
 collision_mask = 8
 script = ExtResource( 1 )
+behaviours_in_use = 6
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -13.8381 )
@@ -183,6 +189,4 @@ frames = SubResource( 8 )
 animation = "in"
 
 [node name="Interrogation" type="AnimatedSprite" parent="Dialogue"]
-visible = false
 frames = SubResource( 9 )
-animation = "out"
