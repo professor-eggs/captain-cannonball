@@ -1,0 +1,20 @@
+[gd_resource type="Animation" load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprites/Crabby/03-Jump/Jump 02.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/Crabby/03-Jump/Jump 03.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/Crabby/03-Jump/Jump 01.png" type="Texture" id=3]
+
+[resource]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ) ]
+}

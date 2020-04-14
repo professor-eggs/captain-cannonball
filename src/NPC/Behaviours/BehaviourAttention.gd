@@ -16,7 +16,7 @@ func _init(
 	character : KinematicBody2D
 ) -> void:
 	_owner = character
-	_dialogue = _owner.get_node("Dialogue")
+#	_dialogue = _owner.get_node("Dialogue")
 	velocity = _owner.velocity
 	facing = _owner.default_facing
 	set_physics_process(false)

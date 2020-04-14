@@ -32,7 +32,16 @@
 [ext_resource path="res://assets/sprites/Pink Star/02-Run/Run 01.png" type="Texture" id=30]
 [ext_resource path="res://assets/sprites/Pink Star/02-Run/Run 05.png" type="Texture" id=31]
 [ext_resource path="res://test/attack_animation.tres" type="Animation" id=32]
-[ext_resource path="res://assets/sprites/Crabby/07-Attack/Attack 04.png" type="Texture" id=33]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 20, 14 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 28, 14 )
+
+[sub_resource type="StreamTexture" id=10]
+flags = 4
+load_path = "res://.import/Jump 03.png-d887ad088514b638b5c3fcd266e208c2.stex"
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9.1711, 10.74 )
@@ -71,22 +80,16 @@ tracks/0/keys = {
 "values": [ ExtResource( 30 ), ExtResource( 29 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 31 ), ExtResource( 27 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 20, 14 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 28, 14 )
-
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ null, ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
-"loop": false,
-"name": "in",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), null ],
 "loop": false,
 "name": "out",
+"speed": 5.0
+}, {
+"frames": [ null, ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "in",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 3 ) ],
@@ -97,14 +100,14 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 9 ) ],
-"loop": false,
-"name": "in",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 8 ), ExtResource( 10 ), null ],
 "loop": false,
 "name": "out",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "in",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ) ],
@@ -120,14 +123,14 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ null, ExtResource( 13 ), ExtResource( 14 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "in",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 17 ), ExtResource( 15 ), null ],
 "loop": false,
 "name": "out",
+"speed": 5.0
+}, {
+"frames": [ null, ExtResource( 13 ), ExtResource( 14 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "in",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 14 ), ExtResource( 16 ) ],
@@ -142,9 +145,24 @@ collision_mask = 8
 script = ExtResource( 1 )
 behaviours_in_use = 6
 
+[node name="AttentionArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="Left" type="CollisionShape2D" parent="AttentionArea"]
+position = Vector2( -48, -14 )
+shape = SubResource( 5 )
+
+[node name="Center" type="CollisionShape2D" parent="AttentionArea"]
+position = Vector2( 0, -14 )
+shape = SubResource( 6 )
+
+[node name="Right" type="CollisionShape2D" parent="AttentionArea"]
+position = Vector2( 48, -14 )
+shape = SubResource( 5 )
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -13.8381 )
-texture = ExtResource( 33 )
+texture = SubResource( 10 )
 __meta__ = {
 "_editor_description_": "Sprite is a placeholder for the default NPC and must be replaced"
 }
@@ -161,21 +179,6 @@ anims/attack_animation = ExtResource( 32 )
 anims/idle = SubResource( 2 )
 anims/jump = SubResource( 3 )
 anims/run = SubResource( 4 )
-
-[node name="AttentionArea" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="Left" type="CollisionShape2D" parent="AttentionArea"]
-position = Vector2( -48, -14 )
-shape = SubResource( 5 )
-
-[node name="Center" type="CollisionShape2D" parent="AttentionArea"]
-position = Vector2( 0, -14 )
-shape = SubResource( 6 )
-
-[node name="Right" type="CollisionShape2D" parent="AttentionArea"]
-position = Vector2( 48, -14 )
-shape = SubResource( 5 )
 
 [node name="Dialogue" type="Node2D" parent="."]
 position = Vector2( 12.2902, -27.9021 )

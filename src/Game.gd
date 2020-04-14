@@ -7,5 +7,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _ready() -> void:
-	var pf_anim = PixelFrogAnimationImporter.new("res://assets/sprites/Crabby/")
-	
+	var looped_animation_names := [
+		"idle",
+		"run"
+	]
+	var pf_anim := PixelFrogAnimationImporter.new(
+		"res://assets/sprites/Crabby/",
+		looped_animation_names
+	)
