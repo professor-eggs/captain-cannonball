@@ -10,24 +10,49 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "KinematicBody2D",
-"class": "BaseNPC",
+"class": "BaseNPCOLD",
 "language": "GDScript",
-"path": "res://src/NPC/BaseNPC.gd"
+"path": "res://src/NPCOLD/BaseNPCOLD.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "BaseNpc",
+"language": "GDScript",
+"path": "res://src/Npc/BaseNpc.gd"
 }, {
 "base": "Node",
-"class": "BehaviourAttention",
+"class": "Behaviour",
 "language": "GDScript",
-"path": "res://src/NPC/Behaviours/BehaviourAttention.gd"
+"path": "res://src/Npc/Behaviours/Behaviour.gd"
 }, {
 "base": "Node",
+"class": "BehaviourAttentionOLD",
+"language": "GDScript",
+"path": "res://src/NPCOLD/Behaviours/BehaviourAttentionOLD.gd"
+}, {
+"base": "Behaviour",
+"class": "BehaviourGravity",
+"language": "GDScript",
+"path": "res://src/Npc/Behaviours/BehaviourGravity.gd"
+}, {
+"base": "Behaviour",
 "class": "BehaviourJump",
 "language": "GDScript",
-"path": "res://src/NPC/Behaviours/BehaviourJump.gd"
+"path": "res://src/Npc/Behaviours/BehaviourJump.gd"
 }, {
 "base": "Node",
+"class": "BehaviourJumpOLD",
+"language": "GDScript",
+"path": "res://src/NPCOLD/Behaviours/BehaviourJumpOLD.gd"
+}, {
+"base": "Behaviour",
 "class": "BehaviourPatrol",
 "language": "GDScript",
-"path": "res://src/NPC/Behaviours/BehaviourPatrol.gd"
+"path": "res://src/Npc/Behaviours/BehaviourPatrol.gd"
+}, {
+"base": "Node",
+"class": "BehaviourPatrolOLD",
+"language": "GDScript",
+"path": "res://src/NPCOLD/Behaviours/BehaviourPatrolOLD.gd"
 }, {
 "base": "Node2D",
 "class": "Cannon",
@@ -55,10 +80,15 @@ _global_script_classes=[ {
 "path": "res://src/Player/Move.gd"
 } ]
 _global_script_class_icons={
-"BaseNPC": "",
-"BehaviourAttention": "",
+"BaseNPCOLD": "",
+"BaseNpc": "",
+"Behaviour": "",
+"BehaviourAttentionOLD": "",
+"BehaviourGravity": "",
 "BehaviourJump": "",
+"BehaviourJumpOLD": "",
 "BehaviourPatrol": "",
+"BehaviourPatrolOLD": "",
 "Cannon": "",
 "PixelFrogAnimationImporter": "",
 "State": "",
@@ -71,6 +101,13 @@ _global_script_class_icons={
 config/name="captain-cannonball"
 run/main_scene="res://src/Game.tscn"
 config/icon="res://assets/sprites/Captain Clown Nose/Idle 01.png"
+
+[debug]
+
+gdscript/warnings/unassigned_variable=false
+gdscript/warnings/unused_variable=false
+gdscript/warnings/unused_argument=false
+gdscript/warnings/return_value_discarded=false
 
 [display]
 

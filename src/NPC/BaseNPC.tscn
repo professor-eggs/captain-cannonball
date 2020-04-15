@@ -1,198 +1,32 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://src/NPC/BaseNPC.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/Pink Star/01-Idle/Idle 01.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/Dialogue/Dead/Dead In 03.png" type="Texture" id=3]
-[ext_resource path="res://assets/sprites/Dialogue/Dead/Dead In 01.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/Dialogue/Dead/Dead In 02.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/Dialogue/Dead/Dead Out 01.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/Dialogue/Dead/Dead Out 02.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/Dialogue/Exclamation/Exclamation Out 01.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/Dialogue/Exclamation/Exclamation In 03.png" type="Texture" id=9]
-[ext_resource path="res://assets/sprites/Dialogue/Exclamation/Exclamation Out 02.png" type="Texture" id=10]
-[ext_resource path="res://assets/sprites/Dialogue/Exclamation/Exclamation In 02.png" type="Texture" id=11]
-[ext_resource path="res://assets/sprites/Dialogue/Exclamation/Exclamation In 01.png" type="Texture" id=12]
-[ext_resource path="res://assets/sprites/Dialogue/Interrogation/Interrogation In 01.png" type="Texture" id=13]
-[ext_resource path="res://assets/sprites/Dialogue/Interrogation/Interrogation In 02.png" type="Texture" id=14]
-[ext_resource path="res://assets/sprites/Dialogue/Interrogation/Interrogation Out 02.png" type="Texture" id=15]
-[ext_resource path="res://assets/sprites/Dialogue/Interrogation/Interrogation In 03.png" type="Texture" id=16]
-[ext_resource path="res://assets/sprites/Dialogue/Interrogation/Interrogation Out 01.png" type="Texture" id=17]
-[ext_resource path="res://src/NPC/Dialogue.gd" type="Script" id=18]
-[ext_resource path="res://assets/sprites/Pink Star/01-Idle/Idle 07.png" type="Texture" id=19]
-[ext_resource path="res://assets/sprites/Pink Star/01-Idle/Idle 06.png" type="Texture" id=20]
-[ext_resource path="res://assets/sprites/Pink Star/01-Idle/Idle 02.png" type="Texture" id=21]
-[ext_resource path="res://assets/sprites/Pink Star/01-Idle/Idle 03.png" type="Texture" id=22]
-[ext_resource path="res://assets/sprites/Pink Star/01-Idle/Idle 08.png" type="Texture" id=23]
-[ext_resource path="res://assets/sprites/Pink Star/01-Idle/Idle 04.png" type="Texture" id=24]
-[ext_resource path="res://assets/sprites/Pink Star/01-Idle/Idle 05.png" type="Texture" id=25]
-[ext_resource path="res://assets/sprites/Pink Star/02-Run/Run 04.png" type="Texture" id=26]
-[ext_resource path="res://assets/sprites/Pink Star/02-Run/Run 06.png" type="Texture" id=27]
-[ext_resource path="res://assets/sprites/Pink Star/02-Run/Run 03.png" type="Texture" id=28]
-[ext_resource path="res://assets/sprites/Pink Star/02-Run/Run 02.png" type="Texture" id=29]
-[ext_resource path="res://assets/sprites/Pink Star/02-Run/Run 01.png" type="Texture" id=30]
-[ext_resource path="res://assets/sprites/Pink Star/02-Run/Run 05.png" type="Texture" id=31]
-[ext_resource path="res://test/attack_animation.tres" type="Animation" id=32]
+[ext_resource path="res://src/Npc/BaseNpc.gd" type="Script" id=1]
+[ext_resource path="res://src/Utility/PixelFrogAnimationImporterData/CrabbyAnimationPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Npc/Behaviours/BehaviourGravity.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Npc/Behaviours/BehaviourPatrol.tscn" type="PackedScene" id=4]
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 20, 14 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 28, 14 )
-
-[sub_resource type="StreamTexture" id=10]
+[sub_resource type="StreamTexture" id=3]
 flags = 4
-load_path = "res://.import/Jump 03.png-d887ad088514b638b5c3fcd266e208c2.stex"
+load_path = "res://.import/Anticipation 01.png-ba07b9fd9e50e195e5dcd725b458bf05.stex"
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9.1711, 10.74 )
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7.35559, 6.03955 )
 
-[sub_resource type="Animation" id=2]
-length = 0.8
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ ExtResource( 2 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 20 ), ExtResource( 19 ), ExtResource( 23 ) ]
-}
-
-[sub_resource type="Animation" id=3]
-
-[sub_resource type="Animation" id=4]
-length = 0.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ ExtResource( 30 ), ExtResource( 29 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 31 ), ExtResource( 27 ) ]
-}
-
-[sub_resource type="SpriteFrames" id=7]
-animations = [ {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), null ],
-"loop": false,
-"name": "out",
-"speed": 5.0
-}, {
-"frames": [ null, ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
-"loop": false,
-"name": "in",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "showing",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=8]
-animations = [ {
-"frames": [ ExtResource( 8 ), ExtResource( 10 ), null ],
-"loop": false,
-"name": "out",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 9 ) ],
-"loop": false,
-"name": "in",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 9 ) ],
-"loop": true,
-"name": "showing",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=9]
-animations = [ {
-"frames": [  ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 17 ), ExtResource( 15 ), null ],
-"loop": false,
-"name": "out",
-"speed": 5.0
-}, {
-"frames": [ null, ExtResource( 13 ), ExtResource( 14 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "in",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ), ExtResource( 16 ) ],
-"loop": true,
-"name": "showing",
-"speed": 5.0
-} ]
-
-[node name="BaseNPC" type="KinematicBody2D"]
-collision_layer = 16
-collision_mask = 8
+[node name="BaseNpc" type="KinematicBody2D"]
 script = ExtResource( 1 )
-behaviours_in_use = 6
-
-[node name="AttentionArea" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="Left" type="CollisionShape2D" parent="AttentionArea"]
-position = Vector2( -48, -14 )
-shape = SubResource( 5 )
-
-[node name="Center" type="CollisionShape2D" parent="AttentionArea"]
-position = Vector2( 0, -14 )
-shape = SubResource( 6 )
-
-[node name="Right" type="CollisionShape2D" parent="AttentionArea"]
-position = Vector2( 48, -14 )
-shape = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -13.8381 )
-texture = SubResource( 10 )
-__meta__ = {
-"_editor_description_": "Sprite is a placeholder for the default NPC and must be replaced"
-}
+position = Vector2( 0, -12.6048 )
+texture = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -10.8112 )
-shape = SubResource( 1 )
-__meta__ = {
-"_editor_description_": ""
-}
+position = Vector2( 0, -6.42136 )
+shape = SubResource( 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack_animation = ExtResource( 32 )
-anims/idle = SubResource( 2 )
-anims/jump = SubResource( 3 )
-anims/run = SubResource( 4 )
+[node name="AnimationPlayer" parent="." instance=ExtResource( 2 )]
 
-[node name="Dialogue" type="Node2D" parent="."]
-position = Vector2( 12.2902, -27.9021 )
-script = ExtResource( 18 )
+[node name="BehaviourGravity" parent="." instance=ExtResource( 3 )]
 
-[node name="Dead" type="AnimatedSprite" parent="Dialogue"]
-visible = false
-frames = SubResource( 7 )
-animation = "in"
-
-[node name="Exclamation" type="AnimatedSprite" parent="Dialogue"]
-visible = false
-frames = SubResource( 8 )
-animation = "in"
-
-[node name="Interrogation" type="AnimatedSprite" parent="Dialogue"]
-frames = SubResource( 9 )
+[node name="BehaviourPatrol" parent="." instance=ExtResource( 4 )]
+start_enabled = true
+_patrol_speed = 200.0

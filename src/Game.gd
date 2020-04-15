@@ -6,12 +6,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().reload_current_scene()
 
 
-func _ready() -> void:
-	var looped_animation_names := [
-		"idle",
-		"run"
-	]
-	var pf_anim := PixelFrogAnimationImporter.new(
-		"res://assets/sprites/Crabby/",
-		looped_animation_names
-	)
+#func _ready() -> void:
+#	var looped_animation_names := [
+#		"idle",
+#		"run"
+#	]
+#	var pf_anim := PixelFrogAnimationImporter.new(
+#		"res://assets/sprites/Crabby/",
+#		looped_animation_names
+#	)

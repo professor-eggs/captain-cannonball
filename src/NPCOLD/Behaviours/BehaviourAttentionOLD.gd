@@ -1,5 +1,5 @@
 extends Node
-class_name BehaviourAttention
+class_name BehaviourAttentionOLD
 
 var _owner : KinematicBody2D
 

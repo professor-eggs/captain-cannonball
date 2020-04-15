@@ -15,7 +15,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 func physics_process(delta: float) -> void:
 	_move.physics_process(delta)
-	if sign(_move.velocity.y) == 1:
+	if sign(_move._velocity.y) == 1:
 		_animation_player.set_animation("fall")
 
 

@@ -7,13 +7,13 @@ export var acceleration_default : float = 300.0
 export var deceleration_default : float = 500.0
 export var movement_threshold_default : float = 3.0
 
-var gravity := gravity_default
-var max_speed := max_speed_default
-var acceleration := acceleration_default
-var deceleration := deceleration_default
-var movement_threshold := movement_threshold_default
+var _gravity := gravity_default
+var _max_speed := max_speed_default
+var _acceleration := acceleration_default
+var _deceleration := deceleration_default
+var _movement_threshold := movement_threshold_default
 
-var velocity := Vector2.ZERO
+var _velocity := Vector2.ZERO
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -26,18 +26,18 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func physics_process(delta: float) -> void:
-	_owner.set_facing(sign(velocity.x))
+	_owner.set_facing(sign(_velocity.x))
 	
-	if abs(velocity.x) > max_speed_default and abs(velocity.x) < max_speed:
-		velocity = calculate_velocity(delta, velocity, 0)
+	if abs(_velocity.x) > max_speed_default and abs(_velocity.x) < _max_speed:
+		_velocity = calculate_velocity(delta, _velocity, 0)
 	else:
-		velocity = calculate_velocity(delta, velocity)
+		_velocity = calculate_velocity(delta, _velocity)
 	
-	velocity = _owner.move_and_slide(velocity, Vector2.UP)
+	_velocity = _owner.move_and_slide(_velocity, Vector2.UP)
 	
 	# reset max speed to default
-	if abs(velocity.x) < max_speed_default:
-		max_speed = max_speed_default
+	if abs(_velocity.x) < max_speed_default:
+		_max_speed = max_speed_default
 	
 	_state_machine.state.do_state_transitions()
 
@@ -68,7 +68,7 @@ func do_state_transitions():
 	match [
 		_owner.is_on_floor(),
 		get_move_direction(),
-		abs(velocity.x) > movement_threshold
+		abs(_velocity.x) > _movement_threshold
 	]:
 		[false, _, _]:
 			new_state = "Move/Air"
@@ -93,13 +93,13 @@ static func get_move_direction() -> float:
 
 func calculate_velocity(
 	delta : float,
-	velocity : Vector2 = self.velocity,
+	velocity : Vector2 = _velocity,
 	move_dir : float = get_move_direction(),
-	max_speed : float = self.max_speed,
-	acceleration : float = self.acceleration,
-	deceleration : float = self.deceleration,
-	gravity : float = self.gravity,
-	movement_threshold : float = self.movement_threshold
+	max_speed : float = _max_speed,
+	acceleration : float = _acceleration,
+	deceleration : float = _deceleration,
+	gravity : float = _gravity,
+	movement_threshold : float = _movement_threshold
 ) -> Vector2:
 	
 	velocity.y += gravity
