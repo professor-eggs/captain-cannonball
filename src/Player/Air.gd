@@ -25,7 +25,7 @@ func enter(msg: Dictionary = {}) -> void:
 			can_jump = true
 	
 	if "jump" in msg and can_jump:
-		_move.velocity.y -= jump_impulse
+		_move._velocity.y -= jump_impulse
 		_animation_player.set_animation("jump")
 		can_jump = false
 

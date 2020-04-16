@@ -16,8 +16,8 @@ func physics_process(delta: float) -> void:
 
 func enter(msg: Dictionary = {}) -> void:
 	if "impulse" in msg:
-		_move.max_speed += abs(msg["impulse"].x)
-		_move.velocity = msg["impulse"]
+		_move._max_speed += abs(msg["impulse"].x)
+		_move._velocity = msg["impulse"]
 
 
 func exit() -> void:

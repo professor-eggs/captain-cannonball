@@ -5,3 +5,6 @@
 
 [node name="BaseEnemy" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+self_modulate = Color( 0.803922, 0.215686, 0.215686, 1 )
