@@ -18,7 +18,7 @@ var _velocity := Vector2.ZERO
 
 func unhandled_input(event: InputEvent) -> void:
 	# process jump
-	if Input.is_action_just_pressed("jump"):
+	if event.is_action_pressed("%s_jump" % _owner.name.to_lower()):
 		_state_machine.transition_to("Move/Air", {
 			"jump" : true,
 			"previous_state" : _state_machine.get_path_to(_state_machine.state)
@@ -67,7 +67,7 @@ func do_state_transitions():
 	}
 	match [
 		_owner.is_on_floor(),
-		get_move_direction(),
+		get_move_direction(_owner),
 		abs(_velocity.x) > _movement_threshold
 	]:
 		[false, _, _]:
@@ -83,9 +83,9 @@ func do_state_transitions():
 	_state_machine.transition_to(new_state, msg)
 
 
-static func get_move_direction() -> float:
-	var left := Input.get_action_strength("move_left")
-	var right := Input.get_action_strength("move_right")
+static func get_move_direction(_owner : Node) -> float:
+	var left := Input.get_action_strength("%s_move_left" % _owner.name.to_lower())
+	var right := Input.get_action_strength("%s_move_right" % _owner.name.to_lower())
 	var move_dir = right - left
 	
 	return move_dir
@@ -94,7 +94,7 @@ static func get_move_direction() -> float:
 func calculate_velocity(
 	delta : float,
 	velocity : Vector2 = _velocity,
-	move_dir : float = get_move_direction(),
+	move_dir : float = get_move_direction(_owner),
 	max_speed : float = _max_speed,
 	acceleration : float = _acceleration,
 	deceleration : float = _deceleration,

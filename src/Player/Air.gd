@@ -1,4 +1,5 @@
 extends State
+class_name StateAir
 
 onready var _move = get_parent() as StateMove
 

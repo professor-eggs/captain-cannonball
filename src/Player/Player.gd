@@ -28,7 +28,3 @@ func _unhandled_input(event: InputEvent) -> void:
 		var cannon_jump_impulse = -cannon.fire()
 		emit_signal("cannon_fired", cannon_jump_impulse)
 
-
-func _ready() -> void:
-	print(get_class())
-
