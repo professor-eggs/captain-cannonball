@@ -9,11 +9,11 @@
 [ext_resource path="res://src/BaseNpc/BaseNpc.gd" type="Script" id=7]
 [ext_resource path="res://src/BaseNpc/Controller.gd" type="Script" id=8]
 
-[sub_resource type="StreamTexture" id=2]
+[sub_resource type="StreamTexture" id=1]
 flags = 4
 load_path = "res://.import/Idle 01.png-55f03b64f97a6720af11a627bdc3139e.stex"
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 7.55537, 6.4323 )
 
 [node name="BaseNpc" type="KinematicBody2D"]
@@ -21,7 +21,7 @@ script = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -12.785 )
-texture = SubResource( 2 )
+texture = SubResource( 1 )
 
 [node name="AnimationPlayer" parent="." instance=ExtResource( 1 )]
 autoplay = "idle"
@@ -29,7 +29,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7.16733 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -46,3 +46,25 @@ script = ExtResource( 4 )
 
 [node name="Controller" type="Node" parent="."]
 script = ExtResource( 8 )
+_plan = [ {
+"action_id": 2,
+"duration": 2.0,
+"next_step_id": 1,
+"step_id": 0,
+"timer": Object(Timer,"_import_path":NodePath(""),"pause_mode":0,"process_priority":0,"process_mode":1,"wait_time":2.0,"one_shot":true,"autostart":false,"script":null)
+
+}, {
+"action_id": 1,
+"duration": 2.0,
+"next_step_id": 2,
+"step_id": 1,
+"timer": Object(Timer,"_import_path":NodePath(""),"pause_mode":0,"process_priority":0,"process_mode":1,"wait_time":2.0,"one_shot":true,"autostart":false,"script":null)
+
+}, {
+"action_id": 0,
+"duration": 0.1,
+"next_step_id": 0,
+"step_id": 2,
+"timer": Object(Timer,"_import_path":NodePath(""),"pause_mode":0,"process_priority":0,"process_mode":1,"wait_time":0.1,"one_shot":true,"autostart":false,"script":null)
+
+} ]
