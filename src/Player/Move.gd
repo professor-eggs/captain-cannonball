@@ -54,6 +54,8 @@ func exit() -> void:
 
 
 func connect_signals() -> void:
+	if _owner.name != "Player":
+		return
 	if not _owner.is_connected("cannon_fired", self, "_on_Player_cannon_fired"):
 		var _err = _owner.connect("cannon_fired", self, "_on_Player_cannon_fired")
 

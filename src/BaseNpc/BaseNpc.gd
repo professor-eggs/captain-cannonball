@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name BaseNpc
 
 var facing : int = -1 setget set_facing
 onready var sprite : Sprite = $Sprite as Sprite
