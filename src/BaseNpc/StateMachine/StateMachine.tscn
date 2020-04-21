@@ -9,9 +9,9 @@
 [ext_resource path="res://src/BaseNpc/StateMachine/Attack.gd" type="Script" id=7]
 [ext_resource path="res://src/BaseNpc/StateMachine/Spot.gd" type="Script" id=8]
 
-[node name="StateMachine" type="Node"]
+[node name="BaseNpcStateMachine" type="Node"]
 script = ExtResource( 1 )
-initial_state = NodePath("Idle")
+initial_state = NodePath("../BaseNpcStateMachine/Idle")
 
 [node name="Idle" type="Node" parent="."]
 script = ExtResource( 2 )

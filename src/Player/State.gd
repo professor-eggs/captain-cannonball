@@ -9,13 +9,15 @@ Use State as a child of a StateMachine node.
 
 
 onready var _state_machine := _get_state_machine(self)
-onready var _animation_player := _get_animation_player(owner)
-onready var _owner : KinematicBody2D = owner
+var _owner : KinematicBody2D
+var _animation_player
 
 
 func _ready() -> void:
-	call_deferred("connect_signals")
+	owner = _state_machine.owner
+	_owner = owner
 	_animation_player = _get_animation_player(owner)
+	call_deferred("connect_signals")
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -49,7 +51,6 @@ func _get_state_machine(node: Node) -> Node:
 
 
 func _get_animation_player(node: Node) -> AnimationPlayer:
-	if owner.name == "Player":
-		pass
-	return (node.get_node("AnimationPlayer") as AnimationPlayer)
+	var anim_player := node.get_node("AnimationPlayer") as AnimationPlayer
+	return anim_player
 

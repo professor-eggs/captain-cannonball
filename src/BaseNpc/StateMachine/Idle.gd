@@ -7,7 +7,6 @@ var _idle_timer : Timer
 
 
 func _ready() -> void:
-	owner = owner.owner
 	_idle_timer = Timer.new()
 	_idle_timer.wait_time = _default_idle_time
 	_idle_timer.one_shot = true
@@ -25,7 +24,7 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	_get_animation_player(owner).play("idle")
+	_animation_player.play("idle")
 	
 	if "idle_time" in msg:
 		_idle_timer.wait_time = msg["idle_time"]

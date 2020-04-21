@@ -8,10 +8,6 @@ var _roam_target : Vector2
 var _roam_direction : int = _initial_roam_direction
 
 
-func _ready() -> void:
-	owner = owner.owner
-
-
 func unhandled_input(event: InputEvent) -> void:
 	_roam_target = owner.spawn_position + Vector2(_roam_direction * _roam_target_threshold, 0)
 
@@ -23,7 +19,7 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	_get_animation_player(owner).play("run")
+	_animation_player.play("run")
 
 
 func exit() -> void:
@@ -44,3 +40,8 @@ func do_state_transitions() -> void:
 
 func connect_signals() -> void:
 	return
+
+
+func _calculate_velocity() -> Vector2:
+	var velocity := Vector2.ZERO
+	return velocity

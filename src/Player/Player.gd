@@ -11,6 +11,10 @@ onready var sprite : Sprite = $Sprite as Sprite
 var facing : int = 1 setget set_facing
 
 
+func _ready() -> void:
+	add_to_group("Player")
+
+
 func set_facing(value : int):
 	if value == 0:
 		return
