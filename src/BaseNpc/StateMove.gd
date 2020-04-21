@@ -1,2 +1,2 @@
-extends StateMove
+extends State
 

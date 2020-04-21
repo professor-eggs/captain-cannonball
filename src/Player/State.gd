@@ -8,13 +8,14 @@ Use State as a child of a StateMachine node.
 """
 
 
-onready var _state_machine: = _get_state_machine(self)
+onready var _state_machine := _get_state_machine(self)
 onready var _animation_player := _get_animation_player(owner)
 onready var _owner : KinematicBody2D = owner
 
 
 func _ready() -> void:
 	call_deferred("connect_signals")
+	_animation_player = _get_animation_player(owner)
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -48,5 +49,7 @@ func _get_state_machine(node: Node) -> Node:
 
 
 func _get_animation_player(node: Node) -> AnimationPlayer:
+	if owner.name == "Player":
+		pass
 	return (node.get_node("AnimationPlayer") as AnimationPlayer)
 

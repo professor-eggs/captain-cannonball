@@ -1,5 +1,4 @@
 extends State
-class_name StateIdle
 
 onready var _move = get_parent() as StateMove
 
