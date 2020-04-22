@@ -6,11 +6,12 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func physics_process(delta: float) -> void:
-	# Arrive to...
-	owner.spawn_position
+	do_state_transitions()
 
 
 func enter(msg: Dictionary = {}) -> void:
+	owner.arrive_target_location.position.x = owner.spawn_position.x
+	owner.arrive_target_location.position.y = owner.spawn_position.y
 	_animation_player.play("run")
 
 

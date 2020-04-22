@@ -1,9 +1,8 @@
 extends KinematicBody2D
 class_name BaseNpc
 
-export (float) var roam_area_threshold := 100.0
 export (float) var spawn_position_threshold := 3.0
-
+export (float, 0, 50, 0.5) var gravity := 12.0
 var facing : int = -1 setget set_facing
 
 onready var sprite : Sprite = $Sprite as Sprite
@@ -42,9 +41,6 @@ func _setup_GSAI_agent() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var player_position = get_tree().get_nodes_in_group("Player")[0].global_position
-	
-	arrive_target_location.position = Vector3(player_position.x, player_position.y, 0)
 	update_agent()
 	priority.calculate_steering(acceleration)
 	
@@ -52,7 +48,8 @@ func _physics_process(delta: float) -> void:
 		agent.linear_speed_max
 	)
 	velocity = velocity.linear_interpolate(Vector2.ZERO, linear_drag)
-	velocity = move_and_slide(velocity)
+	velocity.y += gravity
+	velocity = move_and_slide(velocity, Vector2.UP)
 
 
 func update_agent() -> void:
@@ -72,20 +69,24 @@ func set_facing(value : int):
 	facing = value
 
 
-func is_player_visible() -> bool:
+func turn_to_face(target : Vector2) -> void:
+	set_facing(sign(global_position.direction_to(target).x))
+
+
+func get_player_if_visible() -> Node2D:
+	return null
 	if len(detection_area.get_overlapping_bodies()) == 0:
-		return false
+		return null
 	
 	var player : Node2D = detection_area.get_overlapping_bodies()[0]
 	var direction_to_player := player.global_position - global_position
 	raycast.cast_to = direction_to_player
 	raycast.force_raycast_update()
 	
-	return raycast.get_collider() == player
-
-
-func is_in_roam_area() -> bool:
-	return abs(global_position.x - spawn_position.x) <= roam_area_threshold
+	if raycast.get_collider() == player:
+		return player
+	else:
+		return null
 
 
 func is_at_spawn_position() -> bool:
