@@ -25,7 +25,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 190, 190 )
+position = Vector2( 190, 271.594 )
 cannon_node_path = NodePath("Cannon")
 
 [node name="Sprite" parent="Player" index="0"]
@@ -56,11 +56,25 @@ margin_bottom = 128.0
 reference_path = NodePath("../../../BaseNpc/BaseNpcStateMachine")
 properties = PoolStringArray( "_state_name" )
 
+[node name="DebugPanel2" parent="CanvasLayer/VBoxContainer" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 128.0
+margin_right = 343.0
+margin_bottom = 290.0
+reference_path = NodePath("../../../BaseNpc/BaseNpcStateMachine/Spot")
+properties = PoolStringArray( "spot_time_remaining", "_spot_timer_timed_out" )
+
 [node name="BaseNpc" parent="." instance=ExtResource( 6 )]
-position = Vector2( 300, 190 )
+position = Vector2( 300, 278.619 )
 speed_max = 390.0
 acceleration_max = 690.0
+
+[node name="ArriveMarker" parent="BaseNpc" index="0"]
+frame = 4
 
 [editable path="Player"]
 
 [editable path="BaseNpc"]
+
+[editable path="BaseNpc/BaseNpcStateMachine"]

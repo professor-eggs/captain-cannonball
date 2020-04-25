@@ -4,9 +4,8 @@ export(float) var _default_spot_time := 2.0
 
 var _spot_timer_timed_out := false
 var _spot_timer : Timer
-var _target : Node2D
-var _is_in_roam_area := false
 
+var spot_time_remaining : float
 
 func _ready() -> void:
 	_spot_timer = Timer.new()
@@ -22,34 +21,28 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func physics_process(delta: float) -> void:
-	owner.turn_to_face(_target.global_position)
+	spot_time_remaining = _spot_timer.time_left
+	owner.turn_to_face_target()
 	do_state_transitions()
 
 
 func enter(msg: Dictionary = {}) -> void:
-	if "player" in msg:
-		_target = msg["player"]
-	
-	if "is_in_roam_area" in msg:
-		_is_in_roam_area = msg["is_in_roam_area"]
-	
+	owner.set_arrive_target_location(owner.global_position)
 	_spot_timer.start()
+	_animation_player.play("anticipation")
 
 
 func exit() -> void:
 	_spot_timer.wait_time = _default_spot_time
 	_spot_timer_timed_out = false
-	_target = null
-	_is_in_roam_area = false
 
 
 func do_state_transitions() -> void:
-	if owner.get_player_if_visible():
-		if _spot_timer_timed_out:
-			_state_machine.transition_to("Follow")
-	else:
-		#Player is not visible so go to idle/whatever
-		return
+	var target = owner.get_target_if_visible()
+	if not target:
+		_state_machine.transition_to("Roam")
+	elif _spot_timer_timed_out:
+		_state_machine.transition_to("Follow", { "target": target })
 
 
 func connect_signals() -> void:

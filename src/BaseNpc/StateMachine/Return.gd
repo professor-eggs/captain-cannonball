@@ -20,8 +20,8 @@ func exit() -> void:
 
 
 func do_state_transitions() -> void:
-	if owner.is_player_visible():
-		_state_machine.transition_to("Spot")
+	if owner.get_target_if_visible():
+		_state_machine.transition_to("Spot", {"target": owner.get_target_if_visible()})
 	else:
 		if owner.is_at_spawn_position():
 			# turn around
