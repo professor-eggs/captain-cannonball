@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/tilesets/Palm Tree Island/Terrain/Terrain.tscn" type="PackedScene" id=2]
@@ -6,13 +6,22 @@
 [ext_resource path="res://assets/graph-paper.svg" type="Texture" id=4]
 [ext_resource path="res://src/Player/Cannon/Cannon.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/BaseNpc/BaseNpc.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/UI/debug/DebugPanel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sprites/Wood and Paper UI/Sprites/Prefabs/8.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/Captain Clown Nose/Captain Clown Nose without Sword/08-Dead Ground/Dead Ground 01.png" type="Texture" id=8]
+[ext_resource path="res://addons/Dialogbox/Dialogbox.gd" type="Script" id=9]
+[ext_resource path="res://assets/theme/fonts/font_spritesheet.png" type="BitmapFont" id=10]
+[ext_resource path="res://assets/theme/fonts/montserrat/Montserrat-Medium.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://addons/Dialogbox/resources/click.wav" type="AudioStream" id=12]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 11 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Graph" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0.101961 )
 margin_left = -615.0
 margin_top = -372.0
@@ -21,6 +30,7 @@ margin_bottom = 541.0
 texture = ExtResource( 4 )
 stretch_mode = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -48,30 +58,47 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DebugPanel" parent="CanvasLayer/VBoxContainer" instance=ExtResource( 7 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 343.0
-margin_bottom = 128.0
-reference_path = NodePath("../../../BaseNpc/BaseNpcStateMachine")
-properties = PoolStringArray( "_state_name" )
-
-[node name="DebugPanel2" parent="CanvasLayer/VBoxContainer" instance=ExtResource( 7 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 128.0
-margin_right = 343.0
-margin_bottom = 290.0
-reference_path = NodePath("../../../BaseNpc/BaseNpcStateMachine/Spot")
-properties = PoolStringArray( "spot_time_remaining", "_spot_timer_timed_out" )
-
 [node name="BaseNpc" parent="." instance=ExtResource( 6 )]
 position = Vector2( 300, 278.619 )
 speed_max = 390.0
 acceleration_max = 690.0
 
 [node name="ArriveMarker" parent="BaseNpc" index="0"]
-frame = 4
+frame = 0
+
+[node name="Dialogbox" type="CanvasLayer" parent="."]
+
+[node name="Dialogbox" type="NinePatchRect" parent="Dialogbox"]
+margin_right = 398.0
+margin_bottom = 199.0
+texture = ExtResource( 7 )
+patch_margin_left = 30
+patch_margin_top = 30
+patch_margin_right = 30
+patch_margin_bottom = 30
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+input_trigger = "ui_select"
+input_speedup = "ui_select"
+text_margin = Vector2( 35, 35 )
+textbox_size = Vector2( 400, 150 )
+sound = ExtResource( 12 )
+font = SubResource( 1 )
+
+[node name="TestLabel" type="Label" parent="."]
+margin_left = 117.0
+margin_top = 165.0
+margin_right = 311.0
+margin_bottom = 216.0
+custom_fonts/font = ExtResource( 10 )
+text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [editable path="Player"]
 

@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Player/Cannon/Cannon.gd"
 }, {
+"base": "NinePatchRect",
+"class": "DialogBox",
+"language": "GDScript",
+"path": "res://addons/Dialogbox/Dialogbox.gd"
+}, {
 "base": "Reference",
 "class": "GSAIAgentLocation",
 "language": "GDScript",
@@ -197,6 +202,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "BaseNpc": "",
 "Cannon": "",
+"DialogBox": "",
 "GSAIAgentLocation": "",
 "GSAIArrive": "",
 "GSAIAvoidCollisions": "",
@@ -250,6 +256,10 @@ gdscript/warnings/return_value_discarded=false
 [display]
 
 window/dpi/allow_hidpi=true
+
+[editor_plugins]
+
+enabled=PoolStringArray( "..", "Dialogbox" )
 
 [importer_defaults]
 
@@ -349,6 +359,11 @@ interact={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+npc_dialogue_next={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
 

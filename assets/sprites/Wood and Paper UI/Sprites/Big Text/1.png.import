@@ -1,0 +1,12 @@
+[remap]
+
+importer="dt.gabfip"
+type="BitmapFont"
+valid=false
+
+[deps]
+
+source_file="res://assets/sprites/Wood and Paper UI/Sprites/Big Text/1.png"
+[params]
+
+ranges=PoolStringArray( "", "" )
