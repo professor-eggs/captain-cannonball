@@ -8,6 +8,8 @@ export var cannon_node_path : NodePath
 onready var cannon : Cannon = get_node(cannon_node_path) as Cannon
 onready var sprite : Sprite = $Sprite as Sprite
 
+onready var dialogue_box = $Dialogbox
+
 var facing : int = 1 setget set_facing
 
 
@@ -28,3 +30,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		var cannon_jump_impulse = -cannon.fire()
 		emit_signal("cannon_fired", cannon_jump_impulse)
 
+
+func _ready() -> void:
+	DialogueManager.register_speaker(dialogue_box, "1")

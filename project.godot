@@ -246,6 +246,10 @@ config/name="captain-cannonball"
 run/main_scene="res://src/Game.tscn"
 config/icon="res://assets/sprites/Captain Clown Nose/Idle 01.png"
 
+[autoload]
+
+DialogueManager="*res://src/Dialogue/DialogueManager.gd"
+
 [debug]
 
 gdscript/warnings/unassigned_variable=false

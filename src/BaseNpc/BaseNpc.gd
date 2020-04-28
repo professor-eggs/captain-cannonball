@@ -10,6 +10,8 @@ onready var spawn_position := global_position
 onready var raycast : RayCast2D = $RayCast2D
 onready var detection_area : Area2D = $DetectionArea
 
+onready var dialogue_box = $Dialogbox
+
 var _target : Node2D
 
 # GSAI stuff
@@ -30,6 +32,8 @@ func _ready() -> void:
 	detection_area.connect("body_entered", self, "_on_detection_area_body_entered")
 	detection_area.connect("body_exited", self, "_on_detection_area_body_exited")
 	_setup_GSAI_agent()
+	
+	DialogueManager.register_speaker(dialogue_box, "2")
 
 
 func _setup_GSAI_agent() -> void:
@@ -38,6 +42,7 @@ func _setup_GSAI_agent() -> void:
 	agent.bounding_radius = max($CollisionShape2D.shape.extents.x, $CollisionShape2D.shape.extents.y)
 	update_agent()
 	
+	arrive_target_location.position = GSAIUtils.to_vector3(global_position)
 	var arrive := GSAIArrive.new(agent, arrive_target_location)
 	arrive_blend.add(arrive, 1.0)
 	priority.add(arrive_blend)

@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/BaseNpc/CrabbyAnimationPlayer.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/BaseNpc/StateMachine/StateMachine.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Dialogue/BaseDialogbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/tilesets/Palm Tree Island/Objects/Flag/Flag 01.png" type="Texture" id=3]
 [ext_resource path="res://assets/tilesets/Palm Tree Island/Objects/Flag/Flag 07.png" type="Texture" id=4]
 [ext_resource path="res://assets/tilesets/Palm Tree Island/Objects/Flag/Flag 02.png" type="Texture" id=5]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/tilesets/Palm Tree Island/Objects/Flag/Flag 08.png" type="Texture" id=11]
 [ext_resource path="res://assets/tilesets/Palm Tree Island/Objects/Flag/Flag 05.png" type="Texture" id=12]
 [ext_resource path="res://assets/tilesets/Palm Tree Island/Objects/Flag/Flag 09.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/Wood and Paper UI/Sprites/Prefabs/2.png" type="Texture" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -36,7 +37,7 @@ script = ExtResource( 7 )
 
 [node name="ArriveMarker" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 2
+frame = 8
 playing = true
 centered = false
 offset = Vector2( 0, -93 )
@@ -70,6 +71,10 @@ polygon = PoolVector2Array( 24, -30, 24, 12, -100, 12, -100, -75 )
 visible = false
 polygon = PoolVector2Array( 100, -75, 100, 12, -24, 12, -24, -30 )
 
-[node name="BaseNpcStateMachine" parent="." instance=ExtResource( 2 )]
-
-[editable path="BaseNpcStateMachine"]
+[node name="Dialogbox" parent="." instance=ExtResource( 2 )]
+visible = false
+margin_left = -180.44
+margin_top = -225.307
+margin_right = 217.56
+margin_bottom = -26.3065
+texture = ExtResource( 14 )

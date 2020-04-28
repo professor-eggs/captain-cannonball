@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://assets/sprites/Captain Clown Nose/Captain Clown Nose without Sword/01-Idle/Idle 01.png" type="Texture" id=1]
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=2]
@@ -35,6 +35,7 @@
 [ext_resource path="res://assets/sprites/Captain Clown Nose/Captain Clown Nose without Sword/08-Dead Ground/Dead Ground 02.png" type="Texture" id=33]
 [ext_resource path="res://assets/sprites/Captain Clown Nose/Captain Clown Nose without Sword/07-Dead Hit/Dead Hit 03.png" type="Texture" id=34]
 [ext_resource path="res://assets/sprites/Captain Clown Nose/Captain Clown Nose without Sword/08-Dead Ground/Dead Ground 03.png" type="Texture" id=35]
+[ext_resource path="res://src/Dialogue/BaseDialogbox.tscn" type="PackedScene" id=36]
 
 [sub_resource type="Animation" id=1]
 resource_name = "dead_ground"
@@ -209,3 +210,10 @@ zoom = Vector2( 0.4, 0.4 )
 limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 3.0
+
+[node name="Dialogbox" parent="." instance=ExtResource( 36 )]
+visible = false
+margin_left = -187.405
+margin_top = -227.52
+margin_right = 210.595
+margin_bottom = -28.5199

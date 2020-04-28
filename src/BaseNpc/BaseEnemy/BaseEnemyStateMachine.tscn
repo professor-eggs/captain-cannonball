@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://src/BaseNpc/StateMachine/StateMachine.gd" type="Script" id=1]
+[ext_resource path="res://src/BaseNpc/BaseEnemy/BaseEnemyStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://src/BaseNpc/StateMachine/Idle.gd" type="Script" id=2]
 [ext_resource path="res://src/BaseNpc/StateMachine/Roam.gd" type="Script" id=3]
 [ext_resource path="res://src/BaseNpc/StateMachine/Return.gd" type="Script" id=4]
@@ -9,7 +9,7 @@
 [ext_resource path="res://src/BaseNpc/StateMachine/Attack.gd" type="Script" id=7]
 [ext_resource path="res://src/BaseNpc/StateMachine/Spot.gd" type="Script" id=8]
 
-[node name="BaseNpcStateMachine" type="Node"]
+[node name="BaseEnemytateMachine" type="Node"]
 script = ExtResource( 1 )
 initial_state = NodePath("../BaseNpcStateMachine/Idle")
 
