@@ -27,7 +27,7 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	owner.set_arrive_target_location(owner.global_position)
+	owner.can_move = false
 	_spot_timer.start()
 	_animation_player.play("anticipation")
 

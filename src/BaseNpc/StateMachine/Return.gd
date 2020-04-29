@@ -10,8 +10,8 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	owner.arrive_target_location.position.x = owner.spawn_position.x
-	owner.arrive_target_location.position.y = owner.spawn_position.y
+	owner.can_move = true
+	owner.set_arrive_target_location(owner.spawn_position)
 	_animation_player.play("run")
 
 

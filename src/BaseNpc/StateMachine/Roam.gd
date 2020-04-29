@@ -19,6 +19,7 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
+	owner.can_move = true
 	_roam_target = owner.spawn_position + Vector2(_roam_direction * roam_area_threshold, 0)
 	owner.turn_to_face(_roam_target)
 	

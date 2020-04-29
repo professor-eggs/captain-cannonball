@@ -17,6 +17,7 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
+	owner.can_move = true
 	if "target" in msg:
 		_target = msg["target"]
 		owner.turn_to_face_target()

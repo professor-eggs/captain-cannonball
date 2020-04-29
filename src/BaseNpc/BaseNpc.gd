@@ -21,6 +21,7 @@ export (float, 0, 1, 0.05) var linear_drag := 0.1
 
 var velocity := Vector2.ZERO
 var acceleration := GSAITargetAcceleration.new()
+var can_move : bool = true setget set_can_move
 onready var agent := GSAISteeringAgent.new()
 
 onready var arrive_target_location := GSAIAgentLocation.new()
@@ -138,6 +139,10 @@ func get_target_position() -> Vector2:
 
 func set_arrive_target_location(pos) -> void:
 	arrive_target_location.position = GSAIUtils.to_vector3(pos)
+
+
+func set_can_move(state : bool) -> void:
+	priority.is_enabled = state
 
 
 func _on_detection_area_body_entered(body : Node):

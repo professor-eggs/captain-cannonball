@@ -12,6 +12,7 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
+	owner.can_move = false
 	_animation_player.play("anticipation")
 	yield(get_tree().create_timer(_cooldown_duration), "timeout")
 	_state_machine.transition_to("Attack")

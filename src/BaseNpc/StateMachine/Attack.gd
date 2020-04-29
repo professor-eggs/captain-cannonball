@@ -15,6 +15,7 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
+	owner.can_move = false
 	if "target" in msg:
 		_target = msg["target"]
 	
