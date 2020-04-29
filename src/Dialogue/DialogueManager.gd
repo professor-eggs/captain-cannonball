@@ -17,12 +17,14 @@ func csv_to_dict(file_name) -> Array:
 	var file := File.new()
 	file.open(file_name, File.READ)
 	var headers = file.get_csv_line()
+	var line = file.get_csv_line()
+	
 	while not file.eof_reached():
-		var line = file.get_csv_line()
 		var line_data = {}
 		for i in len(line):
 			line_data[headers[i]] = line[i]
 		arr.append(line_data)
+		line = file.get_csv_line()
 	
 	return arr
 
