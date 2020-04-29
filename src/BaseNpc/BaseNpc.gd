@@ -10,7 +10,7 @@ onready var spawn_position := global_position
 onready var raycast : RayCast2D = $RayCast2D
 onready var detection_area : Area2D = $DetectionArea
 
-onready var dialogue_box = $Dialogbox
+onready var dialogue_box = $BaseDialogbox
 
 var _target : Node2D
 
@@ -32,8 +32,6 @@ func _ready() -> void:
 	detection_area.connect("body_entered", self, "_on_detection_area_body_entered")
 	detection_area.connect("body_exited", self, "_on_detection_area_body_exited")
 	_setup_GSAI_agent()
-	
-	DialogueManager.register_speaker(dialogue_box, "2")
 
 
 func _setup_GSAI_agent() -> void:

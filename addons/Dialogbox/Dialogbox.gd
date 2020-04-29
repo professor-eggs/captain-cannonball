@@ -99,6 +99,7 @@ func _enter_tree():
 	add_child(audio)
 
 func _ready():
+	hide()
 	if text.size() > 0:
 		show_text(text)
 

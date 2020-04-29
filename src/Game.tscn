@@ -5,7 +5,7 @@
 [ext_resource path="res://src/Game.gd" type="Script" id=3]
 [ext_resource path="res://assets/graph-paper.svg" type="Texture" id=4]
 [ext_resource path="res://src/Player/Cannon/Cannon.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/BaseNpc/BaseNpc.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/BaseNpc/BaseFriendlyNpc/BaseFriendlyNpc.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sprites/Captain Clown Nose/Captain Clown Nose without Sword/08-Dead Ground/Dead Ground 01.png" type="Texture" id=8]
 
 [node name="Game" type="Node2D"]
@@ -31,6 +31,13 @@ cannon_node_path = NodePath("Cannon")
 [node name="Sprite" parent="Player" index="0"]
 texture = ExtResource( 8 )
 
+[node name="BaseDialogbox" parent="Player" index="5"]
+visible = true
+margin_left = -48.6487
+margin_top = -84.6908
+margin_right = 50.3513
+margin_bottom = -24.6908
+
 [node name="Cannon" parent="Player" instance=ExtResource( 5 )]
 position = Vector2( 0, -7.59172 )
 z_index = -1
@@ -41,6 +48,7 @@ tile_data = PoolIntArray( 65517, 0, 4, 31, 0, 4, 131053, 0, 65540, 65567, 0, 655
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
 margin_right = 254.0
 margin_bottom = 102.0
 custom_constants/separation = 0
@@ -48,14 +56,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BaseNpc" parent="." instance=ExtResource( 6 )]
-position = Vector2( 300, 278.619 )
-speed_max = 390.0
-acceleration_max = 690.0
-
-[node name="ArriveMarker" parent="BaseNpc" index="0"]
-frame = 7
+[node name="BaseFriendlyNpc" parent="." instance=ExtResource( 6 )]
+position = Vector2( 464.712, 279.908 )
+conversation_id = "1"
 
 [editable path="Player"]
-
-[editable path="BaseNpc"]

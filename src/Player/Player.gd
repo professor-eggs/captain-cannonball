@@ -8,7 +8,7 @@ export var cannon_node_path : NodePath
 onready var cannon : Cannon = get_node(cannon_node_path) as Cannon
 onready var sprite : Sprite = $Sprite as Sprite
 
-onready var dialogue_box = $Dialogbox
+onready var dialogue_box = $BaseDialogbox
 
 var facing : int = 1 setget set_facing
 

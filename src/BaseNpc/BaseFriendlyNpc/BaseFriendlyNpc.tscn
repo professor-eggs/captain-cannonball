@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/BaseNpc/BaseNpc.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/BaseNpc/BaseFriendlyNpc/BaseFriendlyNpc.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/Wood and Paper UI/Sprites/Prefabs/2.png" type="Texture" id=3]
+[ext_resource path="res://src/Dialogue/BaseDialogbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/BaseNpc/BaseFriendlyNpc/BaseFriendlyNpcStateMachine.tscn" type="PackedScene" id=5]
+
+[node name="BaseFriendlyNpc" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="BaseDialogbox" parent="." index="6" instance=ExtResource( 4 )]
+visible = false
+margin_left = -50.8926
+margin_top = -83.5494
+margin_right = 49.1074
+margin_bottom = -23.5494
+texture = ExtResource( 3 )
+
+[node name="BaseFriendlyNpcStateMachine" parent="." index="7" instance=ExtResource( 5 )]
+initial_state = NodePath("Idle")
+
+[editable path="BaseFriendlyNpcStateMachine"]
