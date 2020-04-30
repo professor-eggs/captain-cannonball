@@ -7,6 +7,7 @@ var _spot_timer : Timer
 
 var spot_time_remaining : float
 
+
 func _ready() -> void:
 	_spot_timer = Timer.new()
 	_spot_timer.wait_time = _default_spot_time

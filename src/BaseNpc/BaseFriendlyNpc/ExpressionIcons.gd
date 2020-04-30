@@ -2,8 +2,8 @@ extends Node2D
 
 onready var _original_displacement_x : float = position.x
 onready var _owner : KinematicBody2D = owner as KinematicBody2D
-onready var _dead := $Dead
-onready var _exclamation := $Exclamation
+#onready var _dead := $Dead
+#onready var _exclamation := $Exclamation
 onready var _interrogation := $Interrogation
 
 var _current_dialogue : AnimatedSprite

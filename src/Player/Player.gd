@@ -22,6 +22,54 @@ func set_facing(value : int):
 	
 	facing = value
 
+#class MyCustomSorter:
+#    static func sort_ascending(a, b):
+#        if a[0] < b[0]:
+#            return true
+#        return false
+#var my_items = [[5, "Potato"], [9, "Rice"], [4, "Tomato"]]
+#my_items.sort_custom(MyCustomSorter, "sort_ascending")
+#print(my_items) # Prints [[4, Tomato], [5, Potato], [9, Rice]].
+
+
+class Node2dDistanceSorter:
+	var _global_position : Vector2
+	var _facing : int
+	var _interact_distance
+	
+	func _init(
+		g_pos : Vector2,
+		dir : int,
+		interact_distance : float
+	) -> void:
+		_global_position = g_pos
+		_facing = dir
+		_interact_distance = interact_distance
+	
+	
+	func sort_ascending(a : Node2D, b: Node2D):
+		if (
+			_global_position.distance_to(a.global_position)
+			< _global_position.distance_to(b.global_position)
+		):
+			return true
+		return false
+	
+	
+	func get_interactable_nodes_in_direction(nodes : Array) -> Array:
+		var arr : Array = []
+		for node in nodes:
+			if (
+				sign(_global_position.direction_to(node.global_position).x)
+				== _facing
+				
+				and _global_position.distance_to(node.global_position)
+				< _interact_distance
+			):
+				arr.append(node)
+		arr.sort_custom(self, "sort_ascending")
+		return arr
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("fire_cannon"):
@@ -29,6 +77,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		var cannon_jump_impulse = -cannon.fire()
 		emit_signal("cannon_fired", cannon_jump_impulse)
+	
+	if event.is_action_pressed("ui_select"):
+		var interactables = get_tree().get_nodes_in_group("interactables")
+		var sorter = Node2dDistanceSorter.new(global_position, facing, 100.0)
+		var foo = sorter.get_interactable_nodes_in_direction(interactables)
+		print(foo)
+		
+
 
 
 func _ready() -> void:

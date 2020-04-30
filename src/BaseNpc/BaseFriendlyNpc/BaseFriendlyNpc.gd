@@ -23,12 +23,13 @@ func _interact():
 
 
 func _ready() -> void:
+	add_to_group("interactables")
 	return
 #	DialogueManager.connect("dialogue_complete", self, "_on_DialogueManager_dialogue_complete")
 #	DialogueManager.register_speaker(dialogue_box, "2")
 
 
-func play_animation(state_name : String):
+func play_animation(state_name : String) -> void:
 	var animation_name = "invalid"
 	
 	match state_name:

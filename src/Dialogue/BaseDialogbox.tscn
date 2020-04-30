@@ -8,6 +8,8 @@
 [sub_resource type="DynamicFont" id=1]
 size = 8
 outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 4 )
 
 [node name="BaseDialogbox" type="NinePatchRect"]
