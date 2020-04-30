@@ -8,25 +8,16 @@ onready var expression_icons = $ExpressionIcons
 var can_interact := true
 
 
-#func _unhandled_input(event: InputEvent) -> void:
-#	if event.is_action_pressed("ui_select"):
-#		var player = get_target_if_visible()
-#		if player and can_interact:
-#			_interact()
-#			can_interact = false
-
-
-func _interact():
-	print("interact!")
-	return
-#	DialogueManager.display_dialogue(conversation_id)
+func interact():
+	DialogueManager.display_dialogue(conversation_id)
+	hide_expression()
+	can_interact = false
 
 
 func _ready() -> void:
 	add_to_group("interactables")
-	return
-#	DialogueManager.connect("dialogue_complete", self, "_on_DialogueManager_dialogue_complete")
-#	DialogueManager.register_speaker(dialogue_box, "2")
+	DialogueManager.connect("dialogue_complete", self, "_on_DialogueManager_dialogue_complete")
+	DialogueManager.register_speaker(dialogue_box, "2")
 
 
 func play_animation(state_name : String) -> void:
@@ -44,14 +35,13 @@ func play_animation(state_name : String) -> void:
 
 
 func _on_DialogueManager_dialogue_complete() -> void:
-	return
-#	can_interact = true
+	can_interact = true
 
 
-#func _on_detection_area_body_exited(body : Node):
-#	._on_detection_area_body_exited(body)
-#	dialogue_box.hide()
-#	_on_DialogueManager_dialogue_complete()
+func _on_detection_area_body_exited(body : Node):
+	._on_detection_area_body_exited(body)
+	dialogue_box.hide()
+	_on_DialogueManager_dialogue_complete()
 
 
 func set_expression(expression : String):

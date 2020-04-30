@@ -12,6 +12,34 @@ onready var dialogue_box = $BaseDialogbox
 
 var facing : int = 1 setget set_facing
 
+# can_interact, interacting, cannot_interact
+var _interaction_state : String = "can_interact"
+
+
+func _ready() -> void:
+	DialogueManager.register_speaker(dialogue_box, "1")
+	DialogueManager.connect("dialogue_complete", self, "_on_DialogueManager_dialogue_complete")
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("fire_cannon"):
+		if not cannon.is_cannon_ready:
+			return
+		var cannon_jump_impulse = -cannon.fire()
+		emit_signal("cannon_fired", cannon_jump_impulse)
+	
+	if event.is_action_pressed("ui_select") and _interaction_state == "can_interact":
+		var interactables = get_tree().get_nodes_in_group("interactables")
+		var sorter = Node2dDistanceSorter.new(global_position, facing, 100.0)
+		var foo = sorter.get_interactable_nodes_in_direction(interactables)
+		if len(foo) > 0:
+			foo[0].interact()
+			_interaction_state = "interacting"
+
+
+func _on_DialogueManager_dialogue_complete() -> void:
+	_interaction_state = "can_interact"
+
 
 func set_facing(value : int):
 	if value == 0:
@@ -21,15 +49,6 @@ func set_facing(value : int):
 		sprite.scale.x *= -1
 	
 	facing = value
-
-#class MyCustomSorter:
-#    static func sort_ascending(a, b):
-#        if a[0] < b[0]:
-#            return true
-#        return false
-#var my_items = [[5, "Potato"], [9, "Rice"], [4, "Tomato"]]
-#my_items.sort_custom(MyCustomSorter, "sort_ascending")
-#print(my_items) # Prints [[4, Tomato], [5, Potato], [9, Rice]].
 
 
 class Node2dDistanceSorter:
@@ -71,21 +90,3 @@ class Node2dDistanceSorter:
 		return arr
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("fire_cannon"):
-		if not cannon.is_cannon_ready:
-			return
-		var cannon_jump_impulse = -cannon.fire()
-		emit_signal("cannon_fired", cannon_jump_impulse)
-	
-	if event.is_action_pressed("ui_select"):
-		var interactables = get_tree().get_nodes_in_group("interactables")
-		var sorter = Node2dDistanceSorter.new(global_position, facing, 100.0)
-		var foo = sorter.get_interactable_nodes_in_direction(interactables)
-		print(foo)
-		
-
-
-
-func _ready() -> void:
-	DialogueManager.register_speaker(dialogue_box, "1")

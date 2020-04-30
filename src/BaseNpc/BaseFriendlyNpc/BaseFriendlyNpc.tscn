@@ -33,6 +33,9 @@ animations = [ {
 [node name="BaseFriendlyNpc" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
+[node name="ArriveMarker" parent="." index="0"]
+frame = 7
+
 [node name="BaseDialogbox" parent="." index="6" instance=ExtResource( 4 )]
 margin_left = -50.8926
 margin_top = -83.5494
