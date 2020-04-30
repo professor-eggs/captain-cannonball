@@ -29,12 +29,14 @@ func physics_process(delta: float) -> void:
 func enter(msg: Dictionary = {}) -> void:
 	owner.can_move = false
 	_spot_timer.start()
-	_animation_player.play("anticipation")
+	_animation_player.play("idle")
+	owner.set_expression("interrogation")
 
 
 func exit() -> void:
 	_spot_timer.wait_time = _default_spot_time
 	_spot_timer_timed_out = false
+	owner.hide_expression()
 
 
 func do_state_transitions() -> void:

@@ -212,7 +212,6 @@ smoothing_enabled = true
 smoothing_speed = 3.0
 
 [node name="BaseDialogbox" parent="." instance=ExtResource( 36 )]
-visible = false
 margin_left = -187.405
 margin_top = -227.52
 margin_right = 210.595

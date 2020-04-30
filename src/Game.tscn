@@ -32,7 +32,6 @@ cannon_node_path = NodePath("Cannon")
 texture = ExtResource( 8 )
 
 [node name="BaseDialogbox" parent="Player" index="5"]
-visible = true
 margin_left = -48.6487
 margin_top = -84.6908
 margin_right = 50.3513

@@ -35,7 +35,7 @@ script = ExtResource( 7 )
 
 [node name="ArriveMarker" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 7
+frame = 6
 playing = true
 centered = false
 offset = Vector2( 0, -93 )

@@ -11,6 +11,7 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
 [node name="BaseDialogbox" type="NinePatchRect"]
+visible = false
 margin_right = 100.0
 margin_bottom = 60.0
 texture = ExtResource( 2 )
