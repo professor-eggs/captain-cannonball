@@ -10,7 +10,8 @@ onready var spawn_position := global_position
 onready var raycast : RayCast2D = $RayCast2D
 onready var detection_area : Area2D = $DetectionArea
 
-onready var dialogue_box = $BaseDialogbox
+onready var dialogue_box : DialogBox = $BaseDialogbox
+onready var _animation_player : AnimationPlayer = $AnimationPlayer
 
 var _target : Node2D
 
@@ -86,6 +87,26 @@ func set_facing(value : int):
 	elif facing == -1:
 		detection_area.get_child(0).disabled = false
 		detection_area.get_child(1).disabled = true
+
+
+func play_animation(state_name : String):
+	var animation_name = "invalid"
+	
+	match state_name:
+		"idle":
+			animation_name = "idle"
+		"roam":
+			animation_name = "run"
+		"spot":
+			animation_name = "anticipation"
+		"return":
+			animation_name = "run"
+		"attack":
+			animation_name = "attack"
+		"cooldown":
+			animation_name = "anticipation"
+	
+	_animation_player.play(animation_name)
 
 
 func get_target_if_visible() -> Node2D:

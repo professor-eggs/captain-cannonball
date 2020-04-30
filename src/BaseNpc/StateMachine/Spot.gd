@@ -29,8 +29,9 @@ func physics_process(delta: float) -> void:
 func enter(msg: Dictionary = {}) -> void:
 	owner.can_move = false
 	_spot_timer.start()
-	_animation_player.play("idle")
-	owner.set_expression("interrogation")
+	owner.play_animation("spot")
+	if owner.has_method("set_expression"):
+		owner.set_expression("interrogation")
 
 
 func exit() -> void:

@@ -25,4 +25,3 @@ func show_expression(expression_name) -> void:
 
 func hide_expression() -> void:
 	_current_dialogue.play("out")
-#	yield(_current_dialogue, "animation_finished")

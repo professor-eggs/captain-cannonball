@@ -28,6 +28,20 @@ func _ready() -> void:
 #	DialogueManager.register_speaker(dialogue_box, "2")
 
 
+func play_animation(state_name : String):
+	var animation_name = "invalid"
+	
+	match state_name:
+		"idle":
+			animation_name = "idle"
+		"roam":
+			animation_name = "run"
+		"spot":
+			animation_name = "idle"
+	
+	_animation_player.play(animation_name)
+
+
 func _on_DialogueManager_dialogue_complete() -> void:
 	return
 #	can_interact = true

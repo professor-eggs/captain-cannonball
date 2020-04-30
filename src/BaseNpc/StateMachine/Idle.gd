@@ -26,7 +26,7 @@ func physics_process(delta: float) -> void:
 func enter(msg: Dictionary = {}) -> void:
 	owner.can_move = false
 	owner.turn_to_face(owner.spawn_position)
-	_animation_player.play("idle")
+	owner.play_animation("idle")
 	
 	if "idle_time" in msg:
 		_idle_timer.wait_time = msg["idle_time"]

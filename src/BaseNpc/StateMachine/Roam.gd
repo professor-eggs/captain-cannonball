@@ -24,9 +24,8 @@ func enter(msg: Dictionary = {}) -> void:
 	owner.turn_to_face(_roam_target)
 	
 	owner.arrive_target_location.position.x = _roam_target.x
-	owner.arrive_target_location.position.y = owner.global_position.y
-	
-	_animation_player.play("run")
+	owner.arrive_target_location.position.y = owner.global_position.y	
+	owner.play_animation("roam")
 	
 	if "check_outside_roam_area" in msg:
 		_check_outside_roam_area = msg["check_outside_roam_area"]
