@@ -27,9 +27,18 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+use_visible_characters = true
+character_speed = 1.0
+play_sound = true
+use_input_trigger = true
+use_speedup = true
+text = [  ]
 input_trigger = "ui_select"
 input_speedup = "ui_select"
+speedup_speed = 1.0
 text_margin = Vector2( 12, 12 )
 textbox_size = Vector2( 80, 50 )
 sound = ExtResource( 3 )
 font = SubResource( 1 )
+use_character_frame = false
+frame_textures = [  ]

@@ -14,11 +14,13 @@ var facing : int = 1 setget set_facing
 
 # can_interact, interacting, cannot_interact
 var _interaction_state : String = "can_interact"
+var _interaction_target : Node2D
+export var _max_interaction_distance : float = 200.0
 
 
 func _ready() -> void:
 	DialogueManager.register_speaker(dialogue_box, "1")
-	DialogueManager.connect("dialogue_complete", self, "_on_DialogueManager_dialogue_complete")
+	DialogueManager.connect("conversation_complete", self, "_on_DialogueManager_conversation_complete")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -28,16 +30,35 @@ func _unhandled_input(event: InputEvent) -> void:
 		var cannon_jump_impulse = -cannon.fire()
 		emit_signal("cannon_fired", cannon_jump_impulse)
 	
-	if event.is_action_pressed("ui_select") and _interaction_state == "can_interact":
+	if (
+		event.is_action_pressed("ui_select")
+		and _interaction_state == "can_interact"
+	):
 		var interactables = get_tree().get_nodes_in_group("interactables")
-		var sorter = Node2dDistanceSorter.new(global_position, facing, 100.0)
+		var sorter = Node2dDistanceSorter.new(
+			global_position,
+			facing,
+			_max_interaction_distance
+		)
 		var foo = sorter.get_interactable_nodes_in_direction(interactables)
 		if len(foo) > 0:
-			foo[0].interact()
+			_interaction_target = foo[0]
+			_interaction_target.interact()
 			_interaction_state = "interacting"
 
 
-func _on_DialogueManager_dialogue_complete() -> void:
+func _physics_process(delta: float) -> void:
+	if _interaction_state == "interacting" and _interaction_target:
+		if (
+			global_position.distance_to(_interaction_target.global_position)
+			> _max_interaction_distance
+		):
+			# End dialogue if I get too far
+			_on_DialogueManager_conversation_complete()
+
+
+func _on_DialogueManager_conversation_complete() -> void:
+	_interaction_target = null
 	_interaction_state = "can_interact"
 
 

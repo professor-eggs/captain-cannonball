@@ -9,14 +9,14 @@ var can_interact := true
 
 
 func interact():
-	DialogueManager.display_dialogue(conversation_id)
+	DialogueManager.display_conversation(conversation_id)
 	hide_expression()
 	can_interact = false
 
 
 func _ready() -> void:
 	add_to_group("interactables")
-	DialogueManager.connect("dialogue_complete", self, "_on_DialogueManager_dialogue_complete")
+	DialogueManager.connect("dialogue_complete", self, "_on_DialogueManager_conversation_complete")
 	DialogueManager.register_speaker(dialogue_box, "2")
 
 

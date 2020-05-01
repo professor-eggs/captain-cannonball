@@ -36,6 +36,15 @@ margin_left = -48.6487
 margin_top = -84.6908
 margin_right = 50.3513
 margin_bottom = -24.6908
+use_visible_characters = true
+character_speed = 1.0
+play_sound = true
+use_input_trigger = true
+use_speedup = true
+text = [  ]
+speedup_speed = 1.0
+use_character_frame = false
+frame_textures = [  ]
 
 [node name="Cannon" parent="Player" instance=ExtResource( 5 )]
 position = Vector2( 0, -7.59172 )
