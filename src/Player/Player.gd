@@ -18,11 +18,6 @@ var _interaction_target : Node2D
 export var _max_interaction_distance : float = 200.0
 
 
-func _ready() -> void:
-	DialogueManager.register_speaker(dialogue_box, "1")
-	DialogueManager.connect("conversation_complete", self, "_on_DialogueManager_conversation_complete")
-
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("fire_cannon"):
 		if not cannon.is_cannon_ready:
@@ -45,21 +40,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			_interaction_target = foo[0]
 			_interaction_target.interact()
 			_interaction_state = "interacting"
-
-
-func _physics_process(delta: float) -> void:
-	if _interaction_state == "interacting" and _interaction_target:
-		if (
-			global_position.distance_to(_interaction_target.global_position)
-			> _max_interaction_distance
-		):
-			# End dialogue if I get too far
-			_on_DialogueManager_conversation_complete()
-
-
-func _on_DialogueManager_conversation_complete() -> void:
-	_interaction_target = null
-	_interaction_state = "can_interact"
 
 
 func set_facing(value : int):
