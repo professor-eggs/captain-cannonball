@@ -30,9 +30,14 @@ animations = [ {
 
 [node name="BaseFriendlyNpc" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+spawn_position_threshold = 3.0
+gravity = 12.0
+speed_max = 120.0
+acceleration_max = 250.0
+linear_drag = 0.1
 
 [node name="ArriveMarker" parent="." index="0"]
-frame = 7
+frame = 5
 
 [node name="BaseFriendlyNpcStateMachine" parent="." index="6" instance=ExtResource( 5 )]
 initial_state = NodePath("Idle")

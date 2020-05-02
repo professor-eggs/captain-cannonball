@@ -246,6 +246,10 @@ config/name="captain-cannonball"
 run/main_scene="res://src/Game.tscn"
 config/icon="res://assets/sprites/Captain Clown Nose/Idle 01.png"
 
+[autoload]
+
+Progress="*res://src/Dialogue/progress.gd"
+
 [debug]
 
 gdscript/warnings/unassigned_variable=false
@@ -256,10 +260,12 @@ gdscript/warnings/return_value_discarded=false
 [display]
 
 window/dpi/allow_hidpi=true
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "..", "Dialogbox" )
+enabled=PoolStringArray( ".." )
 
 [importer_defaults]
 

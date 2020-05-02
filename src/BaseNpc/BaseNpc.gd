@@ -10,7 +10,6 @@ onready var spawn_position := global_position
 onready var raycast : RayCast2D = $RayCast2D
 onready var detection_area : Area2D = $DetectionArea
 
-onready var dialogue_box : DialogBox = $BaseDialogbox
 onready var _animation_player : AnimationPlayer = $AnimationPlayer
 
 var _target : Node2D

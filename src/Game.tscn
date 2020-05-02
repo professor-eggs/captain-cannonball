@@ -31,12 +31,6 @@ cannon_node_path = NodePath("Cannon")
 [node name="Sprite" parent="Player" index="0"]
 texture = ExtResource( 8 )
 
-[node name="BaseDialogbox" parent="Player" index="5"]
-margin_left = -48.6487
-margin_top = -84.6908
-margin_right = 50.3513
-margin_bottom = -24.6908
-
 [node name="Cannon" parent="Player" instance=ExtResource( 5 )]
 position = Vector2( 0, -7.59172 )
 z_index = -1
@@ -57,6 +51,11 @@ __meta__ = {
 
 [node name="BaseFriendlyNpc" parent="." instance=ExtResource( 6 )]
 position = Vector2( 358.217, 279.908 )
+spawn_position_threshold = 3.0
+gravity = 12.0
+speed_max = 120.0
+acceleration_max = 250.0
+linear_drag = 0.1
 conversation_id = "1"
 
 [editable path="Player"]
