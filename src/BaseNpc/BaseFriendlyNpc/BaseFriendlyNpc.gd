@@ -3,18 +3,33 @@ class_name BaseFriendlyNpc
 
 export (String) var conversation_id : String = "-1"
 
-onready var expression_icons = $ExpressionIcons
+onready var expression_icons : Node2D = $ExpressionIcons
+var _is_expression_locked : bool = false
 
-var can_interact := true
-
-
-func interact():
-	hide_expression()
-	can_interact = false
+var _interaction_state : String = "can_interact"
+var _interaction_target : Node2D
 
 
 func _ready() -> void:
 	add_to_group("interactables")
+
+
+func initiate_interaction_with(interaction_target : Node2D):
+	if _interaction_state == "can_interact":
+		hide_expression()
+		_is_expression_locked = true
+		_interaction_target = interaction_target
+		_interaction_state = "interacting"
+		print(name, ' initiating interaction with ', interaction_target.name)
+
+
+func end_interaction():
+	if _interaction_state == "interacting" and _interaction_target:
+		# do some cancellation
+		_is_expression_locked = false
+		print(name, ' ending interaction with ', _interaction_target.name)
+		_interaction_target = null
+		_interaction_state = "can_interact"
 
 
 func play_animation(state_name : String) -> void:
@@ -36,7 +51,11 @@ func _on_detection_area_body_exited(body : Node):
 
 
 func set_expression(expression : String):
-	expression_icons.show_expression("interrogation")
+	if _is_expression_locked:
+		return
+	match expression:
+		"interrogation":
+			expression_icons.show_expression("interrogation")
 
 
 func hide_expression():

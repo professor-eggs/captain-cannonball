@@ -24,11 +24,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Player/Cannon/Cannon.gd"
 }, {
-"base": "NinePatchRect",
-"class": "DialogBox",
-"language": "GDScript",
-"path": "res://addons/Dialogbox/Dialogbox.gd"
-}, {
 "base": "Reference",
 "class": "GSAIAgentLocation",
 "language": "GDScript",
@@ -208,7 +203,6 @@ _global_script_class_icons={
 "BaseFriendlyNpc": "",
 "BaseNpc": "",
 "Cannon": "",
-"DialogBox": "",
 "GSAIAgentLocation": "",
 "GSAIArrive": "",
 "GSAIAvoidCollisions": "",
@@ -251,10 +245,6 @@ _global_script_class_icons={
 config/name="captain-cannonball"
 run/main_scene="res://src/Game.tscn"
 config/icon="res://assets/sprites/Captain Clown Nose/Idle 01.png"
-
-[autoload]
-
-DialogueManager="*res://src/Dialogue/DialogueManager.gd"
 
 [debug]
 

@@ -15,7 +15,7 @@ var facing : int = 1 setget set_facing
 # can_interact, interacting, cannot_interact
 var _interaction_state : String = "can_interact"
 var _interaction_target : Node2D
-export var _max_interaction_distance : float = 200.0
+export var _interaction_range : float = 100.0
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -33,13 +33,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		var sorter = Node2dDistanceSorter.new(
 			global_position,
 			facing,
-			_max_interaction_distance
+			_interaction_range
 		)
 		var foo = sorter.get_interactable_nodes_in_direction(interactables)
 		if len(foo) > 0:
-			_interaction_target = foo[0]
-			_interaction_target.interact()
-			_interaction_state = "interacting"
+			_initiate_interaction_with(foo[0])
+
+
+func _physics_process(delta: float) -> void:
+	if _interaction_state == "interacting" and _interaction_target:
+		if (
+			global_position.distance_to(_interaction_target.global_position)
+			> _interaction_range
+		):
+			_end_interaction_with()
 
 
 func set_facing(value : int):
@@ -50,6 +57,25 @@ func set_facing(value : int):
 		sprite.scale.x *= -1
 	
 	facing = value
+
+
+func _initiate_interaction_with(interaction_target : Node2D):
+	if _interaction_state == "can_interact":
+		interaction_target.initiate_interaction_with(self)
+		_interaction_target = interaction_target
+		_interaction_state = "interacting"
+		print(name, ' initiating interaction with ', interaction_target.name)
+		yield(get_tree().create_timer(5.0), "timeout")
+		_end_interaction_with()
+
+
+func _end_interaction_with(interaction_target : Node2D = _interaction_target):
+	if _interaction_state == "interacting" and interaction_target == _interaction_target:
+		# do some cancellation
+		print(name, ' ending interaction with ', _interaction_target.name)
+		_interaction_target.end_interaction()
+		_interaction_target = null
+		_interaction_state = "can_interact"
 
 
 class Node2dDistanceSorter:
@@ -89,5 +115,4 @@ class Node2dDistanceSorter:
 				arr.append(node)
 		arr.sort_custom(self, "sort_ascending")
 		return arr
-
 
