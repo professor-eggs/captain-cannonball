@@ -51,11 +51,6 @@ __meta__ = {
 
 [node name="BaseFriendlyNpc" parent="." instance=ExtResource( 6 )]
 position = Vector2( 358.217, 279.908 )
-spawn_position_threshold = 3.0
-gravity = 12.0
-speed_max = 120.0
-acceleration_max = 250.0
-linear_drag = 0.1
 conversation_id = "1"
 
 [editable path="Player"]

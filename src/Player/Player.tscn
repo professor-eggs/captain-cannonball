@@ -212,7 +212,7 @@ smoothing_enabled = true
 smoothing_speed = 3.0
 
 [node name="BaseSpeechBubble" parent="." instance=ExtResource( 36 )]
-margin_left = -75.9451
-margin_top = -61.9821
-margin_right = -75.9451
-margin_bottom = -61.9821
+margin_left = -52.9407
+margin_top = -74.9994
+margin_right = 67.0593
+margin_bottom = -34.9994

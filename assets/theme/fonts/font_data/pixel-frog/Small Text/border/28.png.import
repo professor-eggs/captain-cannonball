@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/53.png-a44ab1d3e4a7b7be6144a6f02adf6e34.stex"
+path="res://.import/28.png-e9707cb51c3a99e265aede14d9f01514.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/theme/fonts/font_data/pixel-frog/Small Text/53.png"
-dest_files=[ "res://.import/53.png-a44ab1d3e4a7b7be6144a6f02adf6e34.stex" ]
+source_file="res://assets/theme/fonts/font_data/pixel-frog/Small Text/border/28.png"
+dest_files=[ "res://.import/28.png-e9707cb51c3a99e265aede14d9f01514.stex" ]
 
 [params]
 

@@ -9,18 +9,23 @@ var _is_expression_locked : bool = false
 var _interaction_state : String = "can_interact"
 var _interaction_target : Node2D
 
+var _interaction = {
+	"type" : "conversation",
+	"conversation_id" : 1
+}
 
 func _ready() -> void:
 	add_to_group("interactables")
 
 
-func initiate_interaction_with(interaction_target : Node2D):
+func initiate_interaction_with(interaction_target : Node2D) -> Dictionary:
 	if _interaction_state == "can_interact":
 		hide_expression()
 		_is_expression_locked = true
 		_interaction_target = interaction_target
 		_interaction_state = "interacting"
 		print(name, ' initiating interaction with ', interaction_target.name)
+	return _interaction
 
 
 func end_interaction():

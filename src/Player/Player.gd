@@ -59,10 +59,17 @@ func set_facing(value : int):
 
 func _initiate_interaction_with(interaction_target : Node2D):
 	if _interaction_state == "can_interact":
-		interaction_target.initiate_interaction_with(self)
-		_interaction_target = interaction_target
-		_interaction_state = "interacting"
 		print(name, ' initiating interaction with ', interaction_target.name)
+		var interaction : Dictionary = interaction_target.initiate_interaction_with(self)
+		match interaction.type:
+			"conversation":
+				print(interaction.conversation_id)
+		
+		_interaction_target = interaction_target
+		
+		
+		_interaction_state = "interacting"
+		# temp
 		yield(get_tree().create_timer(5.0), "timeout")
 		_end_interaction_with()
 
