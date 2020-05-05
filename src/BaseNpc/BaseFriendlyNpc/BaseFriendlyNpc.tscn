@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/BaseNpc/BaseNpc.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/BaseNpc/BaseFriendlyNpc/BaseFriendlyNpc.gd" type="Script" id=2]
+[ext_resource path="res://src/Dialogue/DialogueInteraction.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Dialogue/BaseSpeechBubble/BaseSpeechBubble.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/BaseNpc/BaseFriendlyNpc/BaseFriendlyNpcStateMachine.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/sprites/Dialogue/Interrogation/Interrogation Out 02.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/Dialogue/Interrogation/Interrogation In 01.png" type="Texture" id=7]
@@ -9,6 +11,7 @@
 [ext_resource path="res://assets/sprites/Dialogue/Interrogation/Interrogation In 03.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/Dialogue/Interrogation/Interrogation Out 01.png" type="Texture" id=10]
 [ext_resource path="res://src/BaseNpc/BaseFriendlyNpc/ExpressionIcons.gd" type="Script" id=11]
+[ext_resource path="res://src/Dialogue/DialogueInteraction.gd" type="Script" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -32,7 +35,7 @@ animations = [ {
 script = ExtResource( 2 )
 
 [node name="ArriveMarker" parent="." index="0"]
-frame = 1
+frame = 0
 
 [node name="BaseFriendlyNpcStateMachine" parent="." index="6" instance=ExtResource( 5 )]
 initial_state = NodePath("Idle")
@@ -46,5 +49,12 @@ frames = SubResource( 1 )
 animation = "out"
 frame = 2
 playing = true
+
+[node name="BaseSpeechBubble" parent="." index="8" instance=ExtResource( 4 )]
+
+[node name="Interactions" type="Node" parent="." index="9"]
+
+[node name="DialogueInteraction" parent="Interactions" index="0" instance=ExtResource( 3 )]
+script = ExtResource( 12 )
 
 [editable path="BaseFriendlyNpcStateMachine"]

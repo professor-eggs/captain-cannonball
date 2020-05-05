@@ -51,6 +51,12 @@ __meta__ = {
 
 [node name="BaseFriendlyNpc" parent="." instance=ExtResource( 6 )]
 position = Vector2( 358.217, 279.908 )
-conversation_id = "1"
+interactor_id = "2"
+
+[node name="DialogueInteraction" parent="BaseFriendlyNpc/Interactions" index="0"]
+dialogue_id = 1
+interaction_target = "1"
 
 [editable path="Player"]
+
+[editable path="BaseFriendlyNpc"]

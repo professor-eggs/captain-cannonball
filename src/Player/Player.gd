@@ -13,7 +13,10 @@ var facing : int = 1 setget set_facing
 # can_interact, interacting, cannot_interact
 var _interaction_state : String = "can_interact"
 var _interaction_target : Node2D
+var _current_interactor : Interactor
+export (String) var interactor_id : String = "1"
 export var _interaction_range : float = 100.0
+onready var interactors : Node = $Interactors
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -27,15 +30,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		event.is_action_pressed("ui_select")
 		and _interaction_state == "can_interact"
 	):
+		# Find the closest valid interaction target and interact with them
 		var interactables = get_tree().get_nodes_in_group("interactables")
 		var sorter = Node2dDistanceSorter.new(
 			global_position,
 			facing,
 			_interaction_range
 		)
-		var foo = sorter.get_interactable_nodes_in_direction(interactables)
-		if len(foo) > 0:
-			_initiate_interaction_with(foo[0])
+		var valid_interaction_targets = (
+			sorter.get_interactable_nodes_in_direction(interactables)
+		)
+		
+		if len(valid_interaction_targets) > 0:
+			_initiate_interaction_with(valid_interaction_targets[0])
 
 
 func _physics_process(delta: float) -> void:
@@ -44,7 +51,7 @@ func _physics_process(delta: float) -> void:
 			global_position.distance_to(_interaction_target.global_position)
 			> _interaction_range
 		):
-			_end_interaction_with()
+			_end_current_interaction()
 
 
 func set_facing(value : int):
@@ -57,30 +64,29 @@ func set_facing(value : int):
 	facing = value
 
 
-func _initiate_interaction_with(interaction_target : Node2D):
+func _initiate_interaction_with(interaction_target : Node2D) -> void:
 	if _interaction_state == "can_interact":
-		print(name, ' initiating interaction with ', interaction_target.name)
-		var interaction : Dictionary = interaction_target.initiate_interaction_with(self)
-		match interaction.type:
-			"conversation":
-				print(interaction.conversation_id)
+		var interaction : Interaction = interaction_target.get_interaction(interactor_id)
+		for interactor in interactors.get_children():
+			if (interactor as Interactor).interaction_type == interaction.interaction_type:
+				_current_interactor = interactor
 		
+		if _current_interactor:
+			_interaction_state = "interacting"
+			_current_interactor.handle_interaction(interaction)
+			set_process_unhandled_input(false)
+		
+		# DELETE ME
 		_interaction_target = interaction_target
-		
-		
-		_interaction_state = "interacting"
-		# temp
-		yield(get_tree().create_timer(5.0), "timeout")
-		_end_interaction_with()
 
 
-func _end_interaction_with(interaction_target : Node2D = _interaction_target):
-	if _interaction_state == "interacting" and interaction_target == _interaction_target:
-		# do some cancellation
-		print(name, ' ending interaction with ', _interaction_target.name)
-		_interaction_target.end_interaction()
-		_interaction_target = null
+func _end_current_interaction():
+	if _interaction_state == "interacting" and _current_interactor:
+		_current_interactor.emit_signal("cancelled_interaction")
+		_current_interactor = null
 		_interaction_state = "can_interact"
+	set_process_unhandled_input(true)
+
 
 
 class Node2dDistanceSorter:

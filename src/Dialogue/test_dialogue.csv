@@ -1,7 +1,7 @@
-conversation_id,speaker_id,phrase_id,phrase_text,character_frame
-1,1,1,Are you ready kids?,normal
-1,2,1,Aye aye Captain!,normal
-1,1,2,I can't hear you!,normal
-1,2,2,AYE AYE CAPTAIN!,normal
-1,1,3,Ooooooh......,normal
-1,1,4,Lorem ipsum dolor sit amet ,normal
+conversation_id,speaker_id,phrase_text,character_frame,wait_on_speaker,wait_on_phrase
+1,1,Are you ready kids?,normal,-1,-1
+1,2,Aye aye Captain!,normal,1,1
+1,1,I can't hear you!,normal,2,1
+1,2,AYE AYE CAPTAIN!,normal,1,2
+1,1,Ooooooh......,normal,2,2
+1,1,Lorem ipsum dolor sit amet ,normal,1,3
