@@ -19,6 +19,11 @@ export var _interaction_range : float = 100.0
 onready var interactors : Node = $Interactors
 
 
+func _ready() -> void:
+	for interactor in interactors.get_children():
+		(interactor as Interactor).connect("interaction_complete", self, "_on_interactor_interaction_complete")
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("fire_cannon"):
 		if not cannon.is_cannon_ready:
@@ -45,15 +50,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			_initiate_interaction_with(valid_interaction_targets[0])
 
 
-func _physics_process(delta: float) -> void:
-	if _interaction_state == "interacting" and _interaction_target:
-		if (
-			global_position.distance_to(_interaction_target.global_position)
-			> _interaction_range
-		):
-			_end_current_interaction()
-
-
 func set_facing(value : int):
 	if value == 0:
 		return
@@ -76,17 +72,22 @@ func _initiate_interaction_with(interaction_target : Node2D) -> void:
 			_current_interactor.handle_interaction(interaction)
 			set_process_unhandled_input(false)
 		
-		# DELETE ME
 		_interaction_target = interaction_target
 
 
-func _end_current_interaction():
+func _on_interactor_interaction_complete(type : String):
+	print('here')
 	if _interaction_state == "interacting" and _current_interactor:
+		print('there')
 		_current_interactor.emit_signal("cancelled_interaction")
 		_current_interactor = null
 		_interaction_state = "can_interact"
-	set_process_unhandled_input(true)
-
+		_interaction_target = null
+	
+	match type:
+		"dialogue":
+			print('everywhere')
+			set_process_unhandled_input(true)
 
 
 class Node2dDistanceSorter:
