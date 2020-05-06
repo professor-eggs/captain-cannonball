@@ -53,6 +53,9 @@ __meta__ = {
 position = Vector2( 358.217, 279.908 )
 interactor_id = "2"
 
+[node name="ArriveMarker" parent="BaseFriendlyNpc" index="0"]
+frame = 3
+
 [node name="DialogueInteraction" parent="BaseFriendlyNpc/Interactions" index="0"]
 dialogue_id = 1
 interaction_target = "1"

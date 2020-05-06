@@ -21,7 +21,8 @@ onready var interactors : Node = $Interactors
 
 func _ready() -> void:
 	for interactor in interactors.get_children():
-		(interactor as Interactor).connect("interaction_complete", self, "_on_interactor_interaction_complete")
+		var _interactor : Interactor = interactor as Interactor
+		_interactor.connect("interaction_completed", self, "_on_interactor_interaction_completed")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -30,6 +31,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		var cannon_jump_impulse = -cannon.fire()
 		emit_signal("cannon_fired", cannon_jump_impulse)
+		get_tree().set_input_as_handled()
 	
 	if (
 		event.is_action_pressed("ui_select")
@@ -48,6 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if len(valid_interaction_targets) > 0:
 			_initiate_interaction_with(valid_interaction_targets[0])
+			get_tree().set_input_as_handled()
 
 
 func set_facing(value : int):
@@ -75,18 +78,15 @@ func _initiate_interaction_with(interaction_target : Node2D) -> void:
 		_interaction_target = interaction_target
 
 
-func _on_interactor_interaction_complete(type : String):
-	print('here')
+func _on_interactor_interaction_completed(type : String):
 	if _interaction_state == "interacting" and _current_interactor:
-		print('there')
-		_current_interactor.emit_signal("cancelled_interaction")
+		_current_interactor.emit_signal("interaction_cancelled")
 		_current_interactor = null
 		_interaction_state = "can_interact"
 		_interaction_target = null
 	
 	match type:
 		"dialogue":
-			print('everywhere')
 			set_process_unhandled_input(true)
 
 

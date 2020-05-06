@@ -35,7 +35,7 @@ animations = [ {
 script = ExtResource( 2 )
 
 [node name="ArriveMarker" parent="." index="0"]
-frame = 5
+frame = 0
 
 [node name="BaseFriendlyNpcStateMachine" parent="." index="6" instance=ExtResource( 5 )]
 initial_state = NodePath("Idle")

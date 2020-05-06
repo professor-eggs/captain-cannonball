@@ -8,12 +8,9 @@ var _current_dialogue_line_index : int = -1
 var _interaction_data : Dictionary
 
 
-#func _init() -> void:
-
-
 func _ready() -> void:
 	set_process_unhandled_input(false)
-	connect("dialogue_ended", self, "_on_DialogueManager_dialogue_ended")
+	connect("dialogue_ended", self, "_on_dialogue_ended")
 
 
 func display_dialogue(
@@ -37,8 +34,7 @@ func display_dialogue(
 	initiating_interactor.connect(
 		cancel_dialogue_signal,
 		self,
-		"_on_initiating_interactor_interaction_cancelled",
-		[interaction_data]
+		"_on_initiating_interactor_interaction_cancelled"
 	)
 	
 	_interaction_data = interaction_data
@@ -54,35 +50,36 @@ func _display_next_dialogue_line():
 		var line = _current_dialogue[_current_dialogue_line_index]
 		(_interaction_data[line.speaker_id] as DialogueBox).show_text(line.phrase_text)
 	else:
-		_cleanup()
+		emit_signal("dialogue_ended")
 
 
 func _clear_visible_dialogue_boxes():
+	if not _current_dialogue_line_index > 0:
+		return
 	var line = _current_dialogue[_current_dialogue_line_index]
 	(_interaction_data[line.speaker_id] as DialogueBox).clear_text()
 
 
-func _cleanup(error : String = "dialogue completed normally"):
+func _cleanup():
 	_current_dialogue = []
 	_current_dialogue_line_index = -1
 	_interaction_data = {}
-	disconnect("dialogue_ended", self, "_on_DialogueManager_dialogue_ended")
-	emit_signal("dialogue_ended", error)
 
 
-func _on_initiating_interactor_interaction_cancelled(interaction_data : Dictionary):
-	for dialogue_box in interaction_data.values():
+func _on_initiating_interactor_interaction_cancelled():
+	for dialogue_box in _interaction_data.values():
 		(dialogue_box as DialogueBox).clear_text()
 	emit_signal("dialogue_ended", "dialogue cancelled by initiating Interactor")
 
 
-func _on_DialogueManager_dialogue_ended(error):
-	print(error)
-	set_process_unhandled_input(false)
+func _on_dialogue_ended(error : String = "dialogue completed normally"):
 	_cleanup()
+	set_process_unhandled_input(false)
+	disconnect("dialogue_ended", self, "_on_dialogue_ended")
 
 
 func _load_dialogue(id : int) -> Array:
+	# doesn't use id at the moment
 	var conversation := []
 	var file := File.new()
 	file.open(dialogues_file_path, File.READ)
@@ -102,3 +99,4 @@ func _load_dialogue(id : int) -> Array:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(_advance_dialogue_signal):
 		_display_next_dialogue_line()
+		get_tree().set_input_as_handled()

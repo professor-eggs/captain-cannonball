@@ -17,6 +17,7 @@ func _physics_process(delta: float) -> void:
 		> _interaction_range
 	):
 		emit_signal("interaction_cancelled")
+		_is_cancelling_interaction = true
 
 
 func _handle_interaction(interaction : Interaction) -> void:
@@ -31,9 +32,11 @@ func _handle_interaction(interaction : Interaction) -> void:
 		interaction_data,
 		"interaction_cancelled"
 	)
+	
+	DialogueManager.connect("dialogue_ended", self, "_on_DialogueManager_dialogue_ended")
 
 
-func _on_DialogueManager_dialogue_ended(error):
-	print(error)
-	emit_signal("interaction_complete", interaction_type)
+func _on_DialogueManager_dialogue_ended(error : String = "dialogue completed normally"):
+	DialogueManager.disconnect("dialogue_ended", self, "_on_DialogueManager_dialogue_ended")
+	emit_signal("interaction_completed", interaction_type)
 	_end_interaction()
