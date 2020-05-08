@@ -6,20 +6,6 @@ export (String) var interactor_id : String = "-1"
 onready var expression_icons : Node2D = $ExpressionIcons
 var _is_expression_locked : bool = false
 
-onready var interactions : Node = $Interactions
-
-
-func _ready() -> void:
-	add_to_group("interactables")
-
-
-func get_interaction(initiator_interactor_id : String) -> Interaction:
-	for interaction in interactions.get_children():
-		if interaction.interaction_target == initiator_interactor_id:
-			return interaction
-	
-	return null
-
 
 func play_animation(state_name : String) -> void:
 	var animation_name = "invalid"
