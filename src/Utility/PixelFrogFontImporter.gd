@@ -1,9 +1,5 @@
 extends Control
-
-
-func _ready() -> void:
-	build_small_text_bitmap_font()
-	build_big_text_bitmap_font()
+class_name PixelFrogFontImporter
 
 
 func build_small_text_bitmap_font():
@@ -13,12 +9,13 @@ func build_small_text_bitmap_font():
 	var bitmap_font := BitmapFont.new()
 	bitmap_font.height = font_h
 	
-	var font_path_1 : String = "res://assets/theme/fonts/font_data/pixel-frog/Small Text/border/"
+	var font_path_1 : String = "res://assets/theme/fonts/font_data/pixel-frog/Small Text/color inverted/"
 	
 	var font_textures := _get_font_textures_from_path(font_path_1)
 	
 	var count : int = 0
 	for font_texture in font_textures:
+		# add 1px edge to the right side of the image
 #		var img : Image = font_texture.get_data()
 #		var new_img = Image.new()
 #		new_img.create(font_w + 1, font_h, img.has_mipmaps(), img.get_format())
@@ -28,9 +25,31 @@ func build_small_text_bitmap_font():
 #			for j in font_h:
 #				new_img.set_pixel(i, j, img.get_pixel(i, j))
 #		new_img.save_png("res://assets/theme/fonts/font_data/pixel-frog/Small Text/border/%s.png" % str(count).pad_zeros(2))
+
+		# invert font color (to white)
+#		var img : Image = font_texture.get_data()
+#		var new_img = Image.new()
+#
+#		new_img.create(
+#			img.get_width(),
+#			img.get_height(),
+#			img.has_mipmaps(),
+#			img.get_format()
+#		)
+#
+#		new_img.lock()
+#		img.lock()
+#		for i in font_w:
+#			for j in font_h:
+#				new_img.set_pixel(i, j, img.get_pixel(i, j).inverted())
+#
+#		img.unlock()
+#		new_img.unlock()
+#		new_img.save_png("res://assets/theme/fonts/font_data/pixel-frog/Small Text/color inverted/%s.png" % str(count).pad_zeros(2))
+
 		bitmap_font.add_texture(font_texture)
 		count += 1
-	
+
 	var default_font_rect := Rect2(0,0,font_w, font_h)
 	
 	# 48-57 latin numbers

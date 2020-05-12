@@ -14,3 +14,8 @@ func _unhandled_input(event: InputEvent) -> void:
 #		"res://assets/sprites/Crabby/",
 #		looped_animation_names
 #	)
+
+
+func _ready() -> void:
+	var font_importer = PixelFrogFontImporter.new()
+	font_importer.build_small_text_bitmap_font()
