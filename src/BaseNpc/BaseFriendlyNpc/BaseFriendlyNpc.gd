@@ -3,8 +3,14 @@ class_name BaseFriendlyNpc
 
 export (String) var interactor_id : String = "-1"
 
+onready var dialogue_box = $BaseDialogueBox
+
 onready var expression_icons : Node2D = $ExpressionIcons
 var _is_expression_locked : bool = false
+
+
+func _ready() -> void:
+	add_to_group("interactables")
 
 
 func play_animation(state_name : String) -> void:

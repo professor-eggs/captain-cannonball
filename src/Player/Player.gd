@@ -15,6 +15,11 @@ export (float) var _interaction_range = 200.0
 onready var _dialogue_box = $BaseDialogueBox
 
 
+
+func _ready() -> void:
+	_dialogue_box.connect("dialogue_ended", self, "_on_dialogue_box_dialogue_ended")
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("fire_cannon"):
 		if not cannon.is_cannon_ready:
@@ -25,7 +30,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	
 	if (
-		event.is_action_pressed("ui_select")
+		event.is_action_pressed("dialogue_advance")
 		and _interaction_state == "can_interact"
 	):
 		# Find the closest valid interaction target and interact with them
@@ -40,8 +45,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		)
 		
 		if len(valid_interaction_targets) > 0:
-			DialogueManager
-			get_tree().set_input_as_handled()
+			_dialogue_box.start_dialogue(valid_interaction_targets[0], event)
+			_interaction_state = "interacting"
+
+
+func _on_dialogue_box_dialogue_ended():
+	_interaction_state = "can_interact"
 
 
 func set_facing(value : int):

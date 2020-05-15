@@ -4,7 +4,7 @@ enum ICONS { TRIANGLE, SQUARE }
 var icon = ICONS.TRIANGLE setget set_icon
 var bouncing = true setget set_bouncing
 
-onready var _original_position := rect_global_position
+onready var _original_position := rect_position
 onready var _bounce_targets := [
 	_original_position + _bounce_displacement,
 	_original_position - _bounce_displacement
@@ -36,7 +36,7 @@ func _start_bounce_tween():
 	_bounce_tween.remove_all()
 	_bounce_tween.interpolate_property(
 		self,
-		"rect_global_position",
+		"rect_position",
 		_bounce_targets[0],
 		_bounce_targets[1],
 		_bounce_cycle_duration,
@@ -83,4 +83,4 @@ func set_bouncing(value):
 		_start_bounce_tween()
 	else:
 		_bounce_tween.stop_all()
-		rect_global_position = _original_position
+		rect_position = _original_position

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/Dialogue/assets/icons8-triangle-32.png" type="Texture" id=1]
 [ext_resource path="res://src/Dialogue/assets/icons8-rounded-square-32.png" type="Texture" id=2]
-[ext_resource path="res://src/Dialogue/DialogueManager/ProgressIndicators.gd" type="Script" id=3]
+[ext_resource path="res://src/Dialogue/DialogueBox/ProgressIndicators.gd" type="Script" id=3]
 [ext_resource path="res://src/Dialogue/DialogueBox/BaseDialogueBox.gd" type="Script" id=4]
 [ext_resource path="res://assets/theme/fonts/font_data/pixel-frog/small-text.font" type="BitmapFont" id=5]
 
@@ -66,9 +66,11 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -6.0
-margin_top = -6.0
+margin_top = -7.46957
+margin_bottom = -1.46957
 texture = ExtResource( 1 )
 expand = true
+stretch_mode = 5
 flip_v = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -80,9 +82,11 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -6.0
-margin_top = -6.0
+margin_top = -7.46957
+margin_bottom = -1.46957
 texture = ExtResource( 2 )
 expand = true
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""

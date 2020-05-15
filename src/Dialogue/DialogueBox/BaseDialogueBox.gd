@@ -1,16 +1,21 @@
 tool
 extends Control
 signal displayed_text
+signal dialogue_ended
 
-export var id : String = "" setget set_id
+export var id : String = "" setget _set_id
+export var dialogue_id : String = ""
+
 var appear_disappear_duration : float = 0.1
-
 
 export (bool) var _typewriter_effect_enabled := true
 export (float) var _typewriter_speed_msec := 40.0
+export (bool) var _typewriter_fast_speed_enabled := true
 export (float) var _typewriter_fast_speed_msec := 1
 var _is_typewriter_temp_disabled := false
 var _typewriter_current_speed_msec : float = _typewriter_speed_msec
+
+export (bool) var _display_all_text_enabled := true
 
 onready var _text_label = $MarginContainer/Text
 onready var _visibility_tween : Tween = $Tween
@@ -34,10 +39,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	if event.is_action_pressed("dialogue_display_all_text"):
-		_is_typewriter_temp_disabled = true
+		if _display_all_text_enabled:
+			_is_typewriter_temp_disabled = true
 	
 	if event.is_action_pressed("dialogue_speed_up", true):
-		_typewriter_current_speed_msec = _typewriter_fast_speed_msec
+		if _typewriter_fast_speed_enabled:
+			_typewriter_current_speed_msec = _typewriter_fast_speed_msec
 	else:
 		_typewriter_current_speed_msec = _typewriter_speed_msec
 
@@ -46,7 +53,10 @@ func _get_configuration_warning() -> String:
 	if not Engine.editor_hint:
 		return ""
 	
-	return "" if not id.empty() else "ID should not be empty."
+	if id.empty():
+		return "ID must not be empty"
+	
+	return ""
 
 
 func show_text(text : String):
@@ -80,6 +90,16 @@ func show_text(text : String):
 	emit_signal("displayed_text")
 
 
+func start_dialogue(interactee, event: InputEvent):
+	if not interactee.get("dialogue_box"):
+		return
+	if interactee.dialogue_box.dialogue_id == "":
+		return
+	
+	var _dialogue_id = interactee.dialogue_box.dialogue_id
+	DialogueManager.start_dialogue(_dialogue_id, event)
+
+
 func _disappear():
 	if Engine.editor_hint:
 		return
@@ -100,15 +120,25 @@ func _appear():
 	yield(_visibility_tween, "tween_completed")
 
 
-func _on_DialogueManager_dialogue_ended():
+func _on_DialogueManager_dialogue_ended(_dialogue_box_data):
 	if Engine.editor_hint:
 		return
 	
+	if not id in _dialogue_box_data:
+		return
+	
 	_disappear()
+	emit_signal("dialogue_ended")
 
 
-func _on_DialogueManager_displayed_last_line(_has_displayed_last_line : bool):
+func _on_DialogueManager_displayed_last_line(
+	_dialogue_box_id,
+	_has_displayed_last_line : bool
+):
 	if Engine.editor_hint:
+		return
+	
+	if not _dialogue_box_id == id:
 		return
 	
 	if _has_displayed_last_line:
@@ -123,13 +153,12 @@ func _on_DialogueManager_auto_advance_set(state : bool):
 	if Engine.editor_hint:
 		return
 	
-	if state:
-		_progress_indicator.hide()
-	else:
-		_progress_indicator.show()
+	_typewriter_fast_speed_enabled = not state
+	_display_all_text_enabled = not state
+	_progress_indicator.visible = not state
 
 
-func set_id(value):
+func _set_id(value):
 	id = value
 	if Engine.editor_hint:
 		update_configuration_warning()
