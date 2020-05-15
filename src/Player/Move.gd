@@ -56,8 +56,21 @@ func exit() -> void:
 func connect_signals() -> void:
 	if _owner.name != "Player":
 		return
-	if not _owner.is_connected("cannon_fired", self, "_on_Player_cannon_fired"):
-		var _err = _owner.connect("cannon_fired", self, "_on_Player_cannon_fired")
+	
+	var signal_data = {
+		"cannon_fired" : { "function_name" : "_on_Player_cannon_fired", "args" : [] },
+		"dialogue_started" : { "function_name" : "_on_Player_dialogue_started", "args" : [] },
+		"dialogue_ended" : { "function_name" : "_on_Player_dialogue_ended", "args" : [] },
+	}
+	
+	for signal_name in signal_data:
+		if not _owner.is_connected(signal_name, self, signal_data[signal_name].function_name):
+			var _err = _owner.connect(
+				signal_name,
+				self,
+				signal_data[signal_name].function_name,
+				signal_data[signal_name].args
+			)
 
 
 func do_state_transitions():
@@ -135,3 +148,13 @@ func _on_Player_cannon_fired(cannon_jump_impulse: Vector2) -> void:
 		"Move/CannonJump",
 		{ "impulse" : cannon_jump_impulse }
 	)
+
+
+func _on_Player_dialogue_started() -> void:
+	print('Move state must slow to a stop...maybe disable itself temporarily')
+	return
+
+
+func _on_Player_dialogue_ended() -> void:
+	print('Move state can re-enable itself now I guess?')
+	return

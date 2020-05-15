@@ -54,7 +54,7 @@ position = Vector2( 358.217, 279.908 )
 interactor_id = "2"
 
 [node name="ArriveMarker" parent="BaseFriendlyNpc" index="0"]
-frame = 1
+frame = 7
 
 [editable path="Player"]
 

@@ -15,6 +15,7 @@ func enter(msg: Dictionary = {}) -> void:
 	if "previous_state" in msg:
 		if msg["previous_state"] == "Move/Air":
 			_animation_player.set_animation("ground")
+	
 	_animation_player.set_animation("idle")
 
 

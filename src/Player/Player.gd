@@ -2,6 +2,8 @@ extends KinematicBody2D
 class_name Player
 
 signal cannon_fired(cannon_jump_impulse)
+signal dialogue_started
+signal dialogue_ended
 
 export var cannon_node_path : NodePath
 
@@ -48,6 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_interaction_target = valid_interaction_targets[0]
 			_dialogue_box.start_dialogue(_interaction_target, event)
 			_interaction_state = "interacting"
+			emit_signal("dialogue_started")
 
 
 func _physics_process(delta: float) -> void:
@@ -63,6 +66,7 @@ func _physics_process(delta: float) -> void:
 func _on_dialogue_box_dialogue_ended():
 	_interaction_state = "can_interact"
 	_interaction_target = null
+	emit_signal("dialogue_ended")
 
 
 func set_facing(value : int):
