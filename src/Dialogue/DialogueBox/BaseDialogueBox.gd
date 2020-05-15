@@ -2,9 +2,11 @@ tool
 extends Control
 signal displayed_text
 signal dialogue_ended
+signal dialogue_interrupted
 
 export var id : String = "" setget _set_id
 export var dialogue_id : String = ""
+var _dialogue_in_progress : bool = false
 
 var appear_disappear_duration : float = 0.1
 
@@ -28,10 +30,6 @@ func _ready() -> void:
 		return
 	
 	hide()
-	DialogueManager.connect("dialogue_ended", self, "_on_DialogueManager_dialogue_ended")
-	DialogueManager.connect("displayed_last_line", self, "_on_DialogueManager_displayed_last_line")
-	DialogueManager.connect("auto_advance_set", self, "_on_DialogueManager_auto_advance_set")
-	DialogueManager.register_dialogue_box(self)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -96,8 +94,22 @@ func start_dialogue(interactee, event: InputEvent):
 	if interactee.dialogue_box.dialogue_id == "":
 		return
 	
+	var dialogue_boxes = [self, interactee.dialogue_box]
+	for db in dialogue_boxes:
+		DialogueManager.connect("dialogue_ended", db, "_on_DialogueManager_dialogue_ended")
+		DialogueManager.connect("displayed_last_line", db, "_on_DialogueManager_displayed_last_line")
+		DialogueManager.connect("auto_advance_set", db, "_on_DialogueManager_auto_advance_set")
+		DialogueManager.register_dialogue_box(db)
+	
 	var _dialogue_id = interactee.dialogue_box.dialogue_id
 	DialogueManager.start_dialogue(_dialogue_id, event)
+	_dialogue_in_progress = true
+
+
+func interrupt_dialogue():
+	if not _dialogue_in_progress:
+		return
+	emit_signal("dialogue_interrupted")
 
 
 func _disappear():
@@ -127,7 +139,12 @@ func _on_DialogueManager_dialogue_ended(_dialogue_box_data):
 	if not id in _dialogue_box_data:
 		return
 	
+	DialogueManager.disconnect("dialogue_ended", self, "_on_DialogueManager_dialogue_ended")
+	DialogueManager.disconnect("displayed_last_line", self, "_on_DialogueManager_displayed_last_line")
+	DialogueManager.disconnect("auto_advance_set", self, "_on_DialogueManager_auto_advance_set")
+	
 	_disappear()
+	_dialogue_in_progress = false
 	emit_signal("dialogue_ended")
 
 

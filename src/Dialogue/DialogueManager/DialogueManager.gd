@@ -50,6 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func register_dialogue_box(db):
 	_dialogue_boxes[db.id] = db
 	db.connect("displayed_text", self, "_on_dialogue_box_displayed_text")
+	db.connect("dialogue_interrupted", self, "_on_dialogue_box_dialogue_interrupted")
 
 
 func start_dialogue(id, event: InputEvent):
@@ -87,6 +88,10 @@ func _display_next_line():
 
 func _end_dialogue():
 	emit_signal("dialogue_ended", _dialogue_boxes)
+	
+	for db in _dialogue_boxes.values():
+		db.disconnect("displayed_text", self, "_on_dialogue_box_displayed_text")
+		db.disconnect("dialogue_interrupted", self, "_on_dialogue_box_dialogue_interrupted")
 	
 	# clears all dialogue boxes
 	_show_line(-1)
@@ -126,6 +131,10 @@ func _on_dialogue_box_displayed_text():
 		ev.pressed = true
 		
 		_unhandled_input(ev)
+
+
+func _on_dialogue_box_dialogue_interrupted():
+	_end_dialogue()
 
 
 func _set_auto_advance(value):

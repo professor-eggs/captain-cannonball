@@ -13,7 +13,7 @@ var facing : int = 1 setget set_facing
 var _interaction_state := "can_interact"
 export (float) var _interaction_range = 200.0
 onready var _dialogue_box = $BaseDialogueBox
-
+var _interaction_target : Node2D = null
 
 
 func _ready() -> void:
@@ -45,12 +45,24 @@ func _unhandled_input(event: InputEvent) -> void:
 		)
 		
 		if len(valid_interaction_targets) > 0:
-			_dialogue_box.start_dialogue(valid_interaction_targets[0], event)
+			_interaction_target = valid_interaction_targets[0]
+			_dialogue_box.start_dialogue(_interaction_target, event)
 			_interaction_state = "interacting"
+
+
+func _physics_process(delta: float) -> void:
+	# If I go too far from the interaction target, then interrupt it
+	if _interaction_state == "interacting":
+		if (
+			global_position.distance_to(_interaction_target.global_position)
+			> _interaction_range
+		):
+			_dialogue_box.interrupt_dialogue()
 
 
 func _on_dialogue_box_dialogue_ended():
 	_interaction_state = "can_interact"
+	_interaction_target = null
 
 
 func set_facing(value : int):
