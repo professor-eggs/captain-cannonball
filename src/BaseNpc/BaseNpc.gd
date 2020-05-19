@@ -11,6 +11,7 @@ onready var raycast : RayCast2D = $RayCast2D
 onready var detection_area : Area2D = $DetectionArea
 
 onready var _animation_player : AnimationPlayer = $AnimationPlayer
+onready var _pathfinder : Node = $Pathfinder
 
 var _target : Node2D
 
@@ -157,7 +158,7 @@ func get_target_position() -> Vector2:
 	return target.global_position
 
 
-func set_arrive_target_location(pos) -> void:
+func set_arrive_target_location(pos : Vector2) -> void:
 	arrive_target_location.position = GSAIUtils.to_vector3(pos)
 
 

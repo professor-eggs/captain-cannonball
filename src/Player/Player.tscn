@@ -164,6 +164,7 @@ tracks/0/keys = {
 extents = Vector2( 9.1711, 7.74533 )
 
 [node name="Player" type="KinematicBody2D"]
+z_index = 10
 collision_mask = 0
 script = ExtResource( 2 )
 

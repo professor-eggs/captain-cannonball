@@ -221,39 +221,30 @@ tracks/0/keys = {
 }
 
 [sub_resource type="StreamTexture" id=34]
-flags = 4
 load_path = "res://.import/Idle 01.png-55f03b64f97a6720af11a627bdc3139e.stex"
 
 [sub_resource type="StreamTexture" id=35]
-flags = 4
 load_path = "res://.import/Idle 02.png-46af98980769d4587344a2e8a069054a.stex"
 
 [sub_resource type="StreamTexture" id=36]
-flags = 4
 load_path = "res://.import/Idle 03.png-4ac9bcc608e858631710db9e57a8f601.stex"
 
 [sub_resource type="StreamTexture" id=37]
-flags = 4
 load_path = "res://.import/Idle 04.png-362ebe7976afe20fa5482f893c3c5a6f.stex"
 
 [sub_resource type="StreamTexture" id=38]
-flags = 4
 load_path = "res://.import/Idle 05.png-3ee8c19ff9d86ff4c0df7c7a31e2bd78.stex"
 
 [sub_resource type="StreamTexture" id=39]
-flags = 4
 load_path = "res://.import/Idle 06.png-d4f05181cb2a1cdbd2a67cad30b8685f.stex"
 
 [sub_resource type="StreamTexture" id=40]
-flags = 4
 load_path = "res://.import/Idle 07.png-2db902408b6aff696fc4c18f38379c1c.stex"
 
 [sub_resource type="StreamTexture" id=41]
-flags = 4
 load_path = "res://.import/Idle 08.png-a78eb9391f2e82c986dff0eef37bfdff.stex"
 
 [sub_resource type="StreamTexture" id=42]
-flags = 4
 load_path = "res://.import/Idle 09.png-027769e496903482490a114f6d02e3a5.stex"
 
 [sub_resource type="Animation" id=43]
@@ -339,7 +330,7 @@ tracks/0/keys = {
 "values": [ SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ) ]
 }
 
-[node name="" type="AnimationPlayer"]
+[node name="AnimationPlayer" type="AnimationPlayer"]
 anims/anticipation = SubResource( 4 )
 anims/attack = SubResource( 9 )
 anims/attack_effect = SubResource( 13 )
